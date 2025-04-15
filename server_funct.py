@@ -155,9 +155,9 @@ def fedavg(parameters, list_nums_local_data):
 
 
 def unflatten_weight(M, flat_w):
-    print("JJJJ")
+ 
     ws = (t.view(s) for (t, s) in zip(flat_w.split(M._weights_numels), M._weights_shapes))
-    print("KKKKKKK")
+    
     for (m, n), w in zip(M._weights_module_names, ws):
         # print(type(m))
         # exit()
