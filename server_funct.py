@@ -263,7 +263,7 @@ def fedawa(args,parameters, list_nums_local_data,central_node,rounds,global_T_we
         # sim_loss=-(torch.sum(probability_train*cos_sim, dim=(-2, -1)))
         # 
         print("L2_distance:",l2_distance)
-        sim_loss=-(torch.sum(probability_train*l2_distance, dim=(-2, -1)))
+        sim_loss=(torch.sum(probability_train*l2_distance, dim=(-2, -1)))
 
         print("Sim_loss:",sim_loss)
      
