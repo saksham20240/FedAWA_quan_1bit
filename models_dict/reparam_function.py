@@ -1,4 +1,3 @@
-
 import torch.nn as nn
 import torch.nn.functional as F
 import torch
@@ -145,6 +144,8 @@ class ReparamModule(nn.Module):
         for m, n in self._weights_module_names:
             setattr(m, n, None)
 
+
+
     def reshape_flat_weights(self, flat_w):
        
         reshaped_weights = {
@@ -185,17 +186,21 @@ class ReparamModule(nn.Module):
             return nn.Module.__call__(self, inp, *args, **kwargs)
 
     def load_state_dict(self, state_dict, strict=True):
-        if 'flat_w' in state_dict:
-            self.flat_w.data = state_dict['flat_w'].detach().clone().requires_grad_(True).to(self.flat_w.device)
+    if 'flat_w' in state_dict:
+        self.flat_w.data = state_dict['flat_w'].detach().clone().requires_grad_(True).to(self.flat_w.device)
+        state_dict = {k: v for k, v in state_dict.items() if k not in ['flat_w', 'scales', 'zero_points']}
 
-            state_dict = {k: v for k, v in state_dict.items() if k != 'flat_w'}
-            super(ReparamModule, self).load_state_dict(state_dict, strict)
+        super(ReparamModule, self).load_state_dict(state_dict, strict)
 
-            ws = (t.view(s) for (t, s) in zip(self.flat_w.split(self._weights_numels), self._weights_shapes))
-            for (m, n), w in zip(self._weights_module_names, ws):
-                setattr(m, n, w.to(self.flat_w.device))
-        else:
-            super(ReparamModule, self).load_state_dict(state_dict, strict)
+        ws = (t.view(s) for (t, s) in zip(self.flat_w.split(self._weights_numels), self._weights_shapes))
+        for (m, n), w in zip(self._weights_module_names, ws):
+            setattr(m, n, w.to(self.flat_w.device))
+
+            #Load scales and zero_points here if needed
+
+    else:
+        super(ReparamModule, self).load_state_dict(state_dict, strict)
+
 
     def __call__(self, inp, *args, **kwargs):
         return self.forward_with_param(inp, self.flat_w, *args, **kwargs)

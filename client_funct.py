@@ -1,13 +1,27 @@
-import numpy as np
 import torch
-import torch.nn.functional as F
-from utils import validate, model_parameter_vector
 import copy
-from nodes import Node
-from collections import defaultdict
-##############################################################################
-# General client function 
-##############################################################################
+import numpy as np
+from torch.utils.data import DataLoader
+from datasets import DatasetSplit
+from utils import init_model
+from utils import init_optimizer, model_parameter_vector
+import torch.nn.functional as F
+import time
+import memory_profiler
+
+
+def quantize(tensor, num_bits=8):
+    """Uniform quantization of a tensor."""
+    qmin = 0.
+    qmax = 2.**num_bits - 1.
+    scale = (tensor.max() - tensor.min()) / (qmax - qmin)
+    zero_point = qmin - tensor.min() / scale
+    q_tensor = torch.round(tensor / scale + zero_point).clamp(qmin, qmax)
+    return q_tensor, scale, zero_point
+
+def dequantize(q_tensor, scale, zero_point):
+    """Dequantize a quantized tensor."""
+    return scale * (q_tensor - zero_point)
 
 def receive_server_model(args, client_nodes, central_node):
 
@@ -31,24 +45,77 @@ def Client_update(args, client_nodes, central_node):
     if args.client_method == 'local_train':
         client_losses = []
         for i in range(len(client_nodes)):
+            #Dequantize received weights
+            for name, param in client_nodes[i].model.named_parameters():
+                if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
+                    param.data = dequantize(param.data, param.scale, param.zero_point)
+
             epoch_losses = []
             for epoch in range(args.E):
                 loss = client_localTrain(args, client_nodes[i])
                 epoch_losses.append(loss)
             client_losses.append(sum(epoch_losses)/len(epoch_losses))
             train_loss = sum(client_losses)/len(client_losses)
+
+            # Measure memory usage before quantization
+            memory_before_quantization = memory_profiler.memory_usage()
+
+            # Quantize weights and biases before sending to the server
+            quantization_start_time = time.time()
+            for name, param in client_nodes[i].model.named_parameters():
+                if 'weight' in name or 'bias' in name:
+                    q_param, scale, zero_point = quantize(param.data)
+                    param.data = q_param #Store quantized values
+                    #Store scale and zero_point as attributes of the parameter
+                    param.scale = scale
+                    param.zero_point = zero_point
+            quantization_end_time = time.time()
+
+             # Measure memory usage after quantization
+            memory_after_quantization = memory_profiler.memory_usage()
+
+            print(f"Client {i}: Time taken for quantization: {quantization_end_time - quantization_start_time:.4f} seconds")
+            print(f"Client {i}: Memory usage before quantization: {memory_before_quantization} MB")
+            print(f"Client {i}: Memory usage after quantization: {memory_after_quantization} MB")
             
 
     elif args.client_method == 'fedprox':
         global_model_param = copy.deepcopy(list(central_node.model.parameters()))
         client_losses = []
         for i in range(len(client_nodes)):
+             #Dequantize received weights
+            for name, param in client_nodes[i].model.named_parameters():
+                if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
+                    param.data = dequantize(param.data, param.scale, param.zero_point)
+
             epoch_losses = []
             for epoch in range(args.E):
                 loss = client_fedprox(global_model_param, args, client_nodes[i])
                 epoch_losses.append(loss)
             client_losses.append(sum(epoch_losses)/len(epoch_losses))
             train_loss = sum(client_losses)/len(client_losses)
+
+             # Measure memory usage before quantization
+            memory_before_quantization = memory_profiler.memory_usage()
+
+            # Quantize weights and biases before sending to the server
+            quantization_start_time = time.time()
+            for name, param in client_nodes[i].model.named_parameters():
+                if 'weight' in name or 'bias' in name:
+                    q_param, scale, zero_point = quantize(param.data)
+                    param.data = q_param #Store quantized values
+                     #Store scale and zero_point as attributes of the parameter
+                    param.scale = scale
+                    param.zero_point = zero_point
+            quantization_end_time = time.time()
+
+             # Measure memory usage after quantization
+            memory_after_quantization = memory_profiler.memory_usage()
+
+            print(f"Client {i}: Time taken for quantization: {quantization_end_time - quantization_start_time:.4f} seconds")
+            print(f"Client {i}: Memory usage before quantization: {memory_before_quantization} MB")
+            print(f"Client {i}: Memory usage after quantization: {memory_after_quantization} MB")
+
 
    
     else:
@@ -130,3 +197,4 @@ def client_fedprox(global_model_param, args, node, loss = 0.0):
         node.optimizer.step(global_model_param)
 
     return loss/len(train_loader)
+

@@ -1,35 +1,39 @@
-import numpy as np
 import torch
-import torch.nn.functional as F
-import math
-import torch.optim as optim
 import torch.nn as nn
+import torch.optim as optim
 import copy
-from torch.optim.lr_scheduler import CosineAnnealingLR
-from utils import init_model
-import math
-from copy import deepcopy
-import warnings
-import torch
-from torch.nn import Module
 from torch.autograd import Variable
-from torch.optim.lr_scheduler import _LRScheduler
-from sklearn.metrics.pairwise import cosine_similarity
-import datetime
-from sklearn.cluster import KMeans
-##############################################################################
-# General server function
-##############################################################################
+from utils import validate
+import time
+import memory_profiler
+
+def quantize(tensor, num_bits=8):
+    """Uniform quantization of a tensor."""
+    qmin = 0.
+    qmax = 2.**num_bits - 1.
+    scale = (tensor.max() - tensor.min()) / (qmax - qmin)
+    zero_point = qmin - tensor.min() / scale
+    q_tensor = torch.round(tensor / scale + zero_point).clamp(qmin, qmax)
+    return q_tensor, scale, zero_point
+
+def dequantize(q_tensor, scale, zero_point):
+    """Dequantize a quantized tensor."""
+    return scale * (q_tensor - zero_point)
 
 def receive_client_models(args, client_nodes, select_list, size_weights):
     client_params = []
     for idx in select_list:
-        if ('fedlaw' in args.server_method) or ('fedawa' in args.server_method):
-            client_params.append(client_nodes[idx].model.get_param(clone = True))
-            
-        else:
-            client_params.append(copy.deepcopy(client_nodes[idx].model.state_dict()))
-    
+        model_state = {}
+        for name, param in client_nodes[idx].model.named_parameters():
+            if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
+                # Dequantize the parameter before storing it
+                dequantized_param = dequantize(param.data, param.scale, param.zero_point)
+                model_state[name] = dequantized_param
+            else:
+                model_state[name] = param.data
+
+        client_params.append(model_state)
+
     agg_weights = [size_weights[idx] for idx in select_list]
     agg_weights = [w/sum(agg_weights) for w in agg_weights]
 
@@ -40,16 +44,21 @@ def receive_client_models(args, client_nodes, select_list, size_weights):
 def receive_client_models_pool(args, client_nodes, select_list, size_weights):
     client_params = []
     for idx in select_list:
-        if ('fedlaw' in args.server_method) or ('fedawa' in args.server_method):
-            client_params.append(client_nodes[idx].model.get_param(clone = True))
-         
-        else:
-            client_params.append(copy.deepcopy(client_nodes[idx].model.state_dict()))
-    
+        model_state = {}
+        for name, param in client_nodes[idx].model.named_parameters():
+            if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
+                # Dequantize the parameter
+                dequantized_param = dequantize(param.data, param.scale, param.zero_point)
+                model_state[name] = dequantized_param
+            else:
+                model_state[name] = param.data
+
+        client_params.append(model_state)
+
     agg_weights = [size_weights[idx] for idx in select_list]
 
     return agg_weights, client_params
-
+    
 def get_model_updates(client_params, prev_para):
     prev_param = copy.deepcopy(prev_para)
     client_updates = []
@@ -200,13 +209,62 @@ def _cost_matrix(x, y, dis, p=2):
 def fedawa(args,parameters, list_nums_local_data,central_node,rounds,global_T_weight):
     param=central_node.model.get_param()
 
+    # Measure server memory usage before dequantization
+    memory_before_dequantization = memory_profiler.memory_usage()
+
+    #Dequantize global parameters
+    for name, param in central_node.model.named_parameters():
+      if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
+        param.data = dequantize(param.data,param.scale,param.zero_point)
+    
+    # Measure server memory usage after dequantization
+    memory_after_dequantization = memory_profiler.memory_usage()
+
+    print(f"Server: Memory usage before dequantization: {memory_before_dequantization} MB")
+    print(f"Server: Memory usage after dequantization: {memory_after_dequantization} MB")
+
     global_params = copy.deepcopy(param)
    
 
-    
-    flat_w_list = [dict_local_params['flat_w'] for dict_local_params in parameters]
-    
-    
+    #Measure server memory usage before quantization
+    memory_before_quantization = memory_profiler.memory_usage()
+
+    #Quantize global parameters
+    quantization_start_time = time.time()
+    for name, param in central_node.model.named_parameters():
+      if 'weight' in name or 'bias' in name:
+        q_param, scale, zero_point = quantize(param.data)
+        param.data = q_param
+        param.scale = scale
+        param.zero_point = zero_point
+    quantization_end_time = time.time()
+
+     #Measure server  memory after quantization
+    memory_after_quantization = memory_profiler.memory_usage()
+    print(f"Global model: Time taken for quantization: {quantization_end_time - quantization_start_time:.4f} seconds")
+    print(f"Server: Memory usage before quantization: {memory_before_quantization} MB")
+    print(f"Server: Memory usage after quantization: {memory_after_quantization} MB")
+   
+    #Dequantize all parameters first
+    # for name, value in global_params.items():
+    #      if isinstance(value,tuple):
+    #        global_params[name] = dequantize(value[0],value[1],value[2])
+    #      else:
+    #        global_params[name] = value
+
+    flat_w_list = []
+    #Dequantize client parameters and flatten
+    # for dict_local_params in parameters:
+    #     dequantized_params = {}
+    #     for name, (data, scale, zero_point) in dict_local_params.items():
+    #         if scale is not None and zero_point is not None:
+    #             dequantized_params[name] = dequantize(data, scale, zero_point)
+    #         else:
+    #             dequantized_params[name] = data
+      
+    #     #Now flatten the dequantized parameters
+    #     flat_w = torch.cat([w.flatten() for w in dequantized_params.values()])
+    #     flat_w_list.append(flat_w)
 
     local_param_list = torch.stack(flat_w_list)
     
@@ -271,35 +329,31 @@ def fedawa(args,parameters, list_nums_local_data,central_node,rounds,global_T_we
         Attoptimizer.zero_grad()
         Loss.backward()
         Attoptimizer.step()
-        print("step "+str(i)+" Loss:"+str(Loss))
+        print("step " + str(i) + " Loss:" + str(Loss))
 
+    global_T_weight = T_weights.data
 
- 
-    global_T_weight=T_weights.data
-    
+    print("T_weights_after update:", global_T_weight)
+    print("probability_train_after update:", probability_train)
 
-    print("T_weights_after update:",global_T_weight)
-
-    print("probability_train_after update:",probability_train)
-
-
-
+    # Aggregate parameters
     fedavg_global_params = copy.deepcopy(parameters[0])
-    # d=[]
-
     for name_param in parameters[0]:
         list_values_param = []
         for dict_local_params, num_local_data in zip(parameters, probability_train):
-            # print(dict_local_params[name_param])
-            list_values_param.append(dict_local_params[name_param] * num_local_data * args.gamma)
-        # print("list_values_param:",list_values_param)
+            list_values_param.append(dict_local_params[name_param][0] * num_local_data * args.gamma)
         value_global_param = sum(list_values_param) / sum(probability_train)
-      
         fedavg_global_params[name_param] = value_global_param
-    
-    return fedavg_global_params,global_T_weight
 
-
-
-
-
+   #Quantize global parameters
+    #quantization_start_time = time.time()
+    #for name, param in central_node.model.named_parameters():
+    #    if 'weight' in name or 'bias' in name:
+    #        q_param, scale, zero_point = quantize(param.data)
+    #        param.data = q_param
+    #        param.scale = scale
+    #        param.zero_point = zero_point
+    #quantization_end_time = time.time()
+    #print(f"Global model: Time taken for quantization: {quantization_end_time - quantization_start_time:.4f} seconds")
+   
+    return fedavg_global_params, global_T_weight
