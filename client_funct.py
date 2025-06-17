@@ -46,6 +46,7 @@ def Client_update(args, client_nodes, central_node):
         client_losses = []
         for i in range(len(client_nodes)):
             #Dequantize received weights
+            #Dequantize received weights
             for name, param in client_nodes[i].model.named_parameters():
                 if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
                     param.data = dequantize(param.data, param.scale, param.zero_point)
@@ -69,6 +70,8 @@ def Client_update(args, client_nodes, central_node):
                     #Store scale and zero_point as attributes of the parameter
                     param.scale = scale
                     param.zero_point = zero_point
+                    # Ensure quantized parameters do not track gradients
+                    param.requires_grad = False
             quantization_end_time = time.time()
 
              # Measure memory usage after quantization
@@ -107,6 +110,8 @@ def Client_update(args, client_nodes, central_node):
                      #Store scale and zero_point as attributes of the parameter
                     param.scale = scale
                     param.zero_point = zero_point
+                     # Ensure quantized parameters do not track gradients
+                    param.requires_grad = False
             quantization_end_time = time.time()
 
              # Measure memory usage after quantization
@@ -123,6 +128,7 @@ def Client_update(args, client_nodes, central_node):
 
 
     return client_nodes, train_loss
+
 
 def Client_validate(args, client_nodes):
     '''
@@ -197,4 +203,3 @@ def client_fedprox(global_model_param, args, node, loss = 0.0):
         node.optimizer.step(global_model_param)
 
     return loss/len(train_loader)
-
