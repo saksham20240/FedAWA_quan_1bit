@@ -1,4 +1,3 @@
-
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -7,6 +6,7 @@ from torch.backends import cudnn
 from torch.optim import Optimizer
 from models_dict import densenet, resnet, cnn
 from models_dict.vit import ViT,ViT_fedlaw
+import server_funct #Import server_funct
 
 ##############################################################################
 # Tools
@@ -202,7 +202,7 @@ def init_model(model_type, args):
         elif model_type == 'WRN56_2':
             model = resnet.WRN56_2(num_classes)
         elif model_type == 'WRN56_4':
-            model = resnet.WRN56_4(num_classes)
+            model = resnet.ResNet56_4(num_classes)
         elif model_type == 'WRN56_8':
             model = resnet.WRN56_8(num_classes)
         elif model_type == 'DenseNet121':
@@ -287,10 +287,13 @@ class PerturbedGradientDescent(Optimizer):
 ##############################################################################
 
 def validate(args, node, which_dataset = 'validate'):
-    # print(node.model.state_dict())
-    # print("JJJJJ")
-    # exit()
     node.model.cuda().eval() 
+
+    # Dequantize the model parameters before validation
+    for name, param in node.model.named_parameters():
+        if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
+            param.data = server_funct.dequantize(param.data, param.scale, param.zero_point)
+    
     if which_dataset == 'validate':
         test_loader = node.validate_set
     elif which_dataset == 'local':
@@ -302,19 +305,8 @@ def validate(args, node, which_dataset = 'validate'):
     with torch.no_grad():
         for idx, (data, target) in enumerate(test_loader):
             data, target = data.cuda(), target.cuda()
-            
-            # if which_dataset == 'local':
-            #     output = node.model(data,True)
-            #     exit()
-            # else:
-            output = node.model(data)
 
-            
-            # if which_dataset == 'local':
-                # print("JJJJJJJ")
-                # print("output:",output)
-                # print("JJJJJJJ")
-                # exit()
+            output = node.model(data)
             pred = output.argmax(dim=1)
             correct += pred.eq(target.view_as(pred)).sum().item()
         acc = correct / len(test_loader.dataset) * 100
