@@ -63,7 +63,7 @@ def get_model_updates(client_params, prev_para):
     prev_param = copy.deepcopy(prev_para)
     client_updates = []
     for param in client_params:
-        client_updates.append(param.sub(prev_param))
+        client_updates.append(param.sub(param.data))
     return client_updates
 
 def get_client_params_with_serverlr(server_lr, prev_param, client_updates):
@@ -263,8 +263,8 @@ def fedawa(args,parameters, list_nums_local_data,central_node,rounds,global_T_we
     #             dequantized_params[name] = data
       
     #     #Now flatten the dequantized parameters
-    #     flat_w = torch.cat([w.flatten() for w in dequantized_params.values()])
-    #     flat_w_list.append(flat_w)
+    #     flat_w = torch.cat([w.flatten() for
+
 
     local_param_list = torch.stack(flat_w_list)
     
