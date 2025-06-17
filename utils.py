@@ -5,8 +5,15 @@ import random
 from torch.backends import cudnn
 from torch.optim import Optimizer
 from models_dict import densenet, resnet, cnn
-from models_dict.vit import ViT,ViT_fedlaw
-import server_funct #Import server_funct
+from models_dict.vit import ViT, ViT_fedlaw
+
+##############################################################################
+# Quantization functions (local copy for consistency)
+##############################################################################
+
+def dequantize(q_tensor, scale, zero_point):
+    """Dequantize a quantized tensor."""
+    return scale * (q_tensor.float() - zero_point)
 
 ##############################################################################
 # Tools
@@ -35,7 +42,6 @@ class RunningAverage():
     def value(self):
         return self.total / float(self.steps)
 
-
 def model_parameter_vector(args, model):
     if ('fedlaw' in args.server_method) or ('fedawa' in args.server_method):
         vector = model.flat_w
@@ -57,68 +63,60 @@ def init_model(model_type, args):
         num_classes = 100
 
     if ('fedlaw' in args.server_method) or ('fedawa' in args.server_method):
-
-        # if 'fedlaw' in args.server_method:
         if model_type == 'CNN':
             if args.dataset == 'cifar10':
                 model = cnn.CNNCifar10_fedlaw()
-                # print(model.state_dict())
-                # exit()
             elif args.dataset == 'fmnist':
                 model = cnn.CNNfmnist_fedlaw()
             else:
                 model = cnn.CNNCifar100_fedlaw()
         elif model_type == 'Vit':
-            size=32
-            args.patch=4
-            args.dimhead=512
+            size = 32
+            args.patch = 4
+            args.dimhead = 512
 
-
-            # import timm
-            # model = timm.create_model("vit_base_patch16_224", pretrained=False)
-            # model.head = nn.Linear(model.head.in_features, 200)
             if args.dataset == 'cifar10':
                 model = ViT_fedlaw(
-                    image_size = size,
-                    patch_size = args.patch,
-                    num_classes = 10,
-                    dim = int(args.dimhead),
-                    depth = 6,
-                    heads = 8,
-                    mlp_dim = 512,
-                    dropout = 0.1,
-                    emb_dropout = 0.1
+                    image_size=size,
+                    patch_size=args.patch,
+                    num_classes=10,
+                    dim=int(args.dimhead),
+                    depth=6,
+                    heads=8,
+                    mlp_dim=512,
+                    dropout=0.1,
+                    emb_dropout=0.1
                 )
             elif args.dataset == 'tinyimagenet':
-                size=64
-                patch=16
-                args.dimhead=512
+                size = 64
+                patch = 16
+                args.dimhead = 512
                 model = ViT_fedlaw(
-                    image_size = size,
-                    patch_size = args.patch,
-                    num_classes = 200,
-                    dim = int(args.dimhead),
-                    depth = 6,
-                    heads = 8,
-                    mlp_dim = 512,
-                    dropout = 0.1,
-                    emb_dropout = 0.1
+                    image_size=size,
+                    patch_size=args.patch,
+                    num_classes=200,
+                    dim=int(args.dimhead),
+                    depth=6,
+                    heads=8,
+                    mlp_dim=512,
+                    dropout=0.1,
+                    emb_dropout=0.1
                 )
             else:
                 model = ViT_fedlaw(
-                    image_size = size,
-                    patch_size = args.patch,
-                    num_classes = 100,
-                    dim = int(args.dimhead),
-                    depth = 6,
-                    heads = 8,
-                    mlp_dim = 512,
-                    dropout = 0.1,
-                    emb_dropout = 0.1
+                    image_size=size,
+                    patch_size=args.patch,
+                    num_classes=100,
+                    dim=int(args.dimhead),
+                    depth=6,
+                    heads=8,
+                    mlp_dim=512,
+                    dropout=0.1,
+                    emb_dropout=0.1
                 )
         elif model_type == 'ResNet20':
             model = resnet.ResNet20_fedlaw(num_classes)
-        elif model_type=='ResNet18':
+        elif model_type == 'ResNet18':
             model = resnet.ResNet18_fedlaw(num_classes)
         elif model_type == 'ResNet56':
             model = resnet.ResNet56_fedlaw(num_classes)
@@ -139,7 +137,7 @@ def init_model(model_type, args):
         elif model_type == 'MLP':
             model = cnn.MLP_fedlaw()
         elif model_type == 'LeNet5':
-            model = cnn.LeNet5_fedlaw() 
+            model = cnn.LeNet5_fedlaw()
     else:
         if model_type == 'CNN':
             if args.dataset == 'cifar10':
@@ -149,51 +147,51 @@ def init_model(model_type, args):
             else:
                 model = cnn.CNNCifar100()
         elif model_type == 'Vit':
-            size=32
-            args.patch=4
-            args.dimhead=512
+            size = 32
+            args.patch = 4
+            args.dimhead = 512
             if args.dataset == 'cifar10':
-                    model = ViT(
-                        image_size = size,
-                        patch_size = args.patch,
-                        num_classes = 10,
-                        dim = int(args.dimhead),
-                        depth = 6,
-                        heads = 8,
-                        mlp_dim = 512,
-                        dropout = 0.1,
-                        emb_dropout = 0.1
-                    )
-            elif args.dataset == 'tinyimagenet':
-                size=64
-                patch=16
-                args.dimhead=512
                 model = ViT(
-                    image_size = size,
-                    patch_size = args.patch,
-                    num_classes = 200,
-                    dim = int(args.dimhead),
-                    depth = 6,
-                    heads = 8,
-                    mlp_dim = 512,
-                    dropout = 0.1,
-                    emb_dropout = 0.1
+                    image_size=size,
+                    patch_size=args.patch,
+                    num_classes=10,
+                    dim=int(args.dimhead),
+                    depth=6,
+                    heads=8,
+                    mlp_dim=512,
+                    dropout=0.1,
+                    emb_dropout=0.1
+                )
+            elif args.dataset == 'tinyimagenet':
+                size = 64
+                patch = 16
+                args.dimhead = 512
+                model = ViT(
+                    image_size=size,
+                    patch_size=args.patch,
+                    num_classes=200,
+                    dim=int(args.dimhead),
+                    depth=6,
+                    heads=8,
+                    mlp_dim=512,
+                    dropout=0.1,
+                    emb_dropout=0.1
                 )
             else:
                 model = ViT(
-                    image_size = size,
-                    patch_size = args.patch,
-                    num_classes = 100,
-                    dim = int(args.dimhead),
-                    depth = 6,
-                    heads = 8,
-                    mlp_dim = 512,
-                    dropout = 0.1,
-                    emb_dropout = 0.1
+                    image_size=size,
+                    patch_size=args.patch,
+                    num_classes=100,
+                    dim=int(args.dimhead),
+                    depth=6,
+                    heads=8,
+                    mlp_dim=512,
+                    dropout=0.1,
+                    emb_dropout=0.1
                 )
         elif model_type == 'ResNet20':
             model = resnet.ResNet20(num_classes)
-        elif model_type=='ResNet18':
+        elif model_type == 'ResNet18':
             model = resnet.ResNet18(num_classes)
         elif model_type == 'ResNet56':
             model = resnet.ResNet56(num_classes)
@@ -202,7 +200,7 @@ def init_model(model_type, args):
         elif model_type == 'WRN56_2':
             model = resnet.WRN56_2(num_classes)
         elif model_type == 'WRN56_4':
-            model = resnet.ResNet56_4(num_classes)
+            model = resnet.WRN56_4(num_classes)  # Fixed: was ResNet56_4
         elif model_type == 'WRN56_8':
             model = resnet.WRN56_8(num_classes)
         elif model_type == 'DenseNet121':
@@ -214,7 +212,7 @@ def init_model(model_type, args):
         elif model_type == 'MLP':
             model = cnn.MLP()
         elif model_type == 'LeNet5':
-            model = cnn.LeNet5() 
+            model = cnn.LeNet5()
 
     return model
 
@@ -241,16 +239,16 @@ def setup_seed(seed):
 # Training function
 ##############################################################################
 
-def generate_selectlist(client_node, ratio = 0.5):
+def generate_selectlist(client_node, ratio=0.5):
     candidate_list = [i for i in range(len(client_node))]
     select_num = int(ratio * len(client_node))
-    select_list = np.random.choice(candidate_list, select_num, replace = False).tolist()
+    select_list = np.random.choice(candidate_list, select_num, replace=False).tolist()
     return select_list
 
 def lr_scheduler(rounds, node_list, args):
     # learning rate scheduler for decaying
     if rounds != 0:
-        args.lr *= 0.99 #0.99
+        args.lr *= 0.99  # 0.99
         for i in range(len(node_list)):
             node_list[i].args.lr = args.lr
             node_list[i].optimizer.param_groups[0]['lr'] = args.lr
@@ -262,23 +260,12 @@ class PerturbedGradientDescent(Optimizer):
             raise ValueError(f'Invalid learning rate: {lr}')
 
         default = dict(lr=lr, mu=mu)
-
         super().__init__(params, default)
 
     @torch.no_grad()
     def step(self, global_params):
         for group in self.param_groups:
             for p, g in zip(group['params'], global_params):
-                # for name, param in node.model.named_parameters():
-                #     if "layers.4" in name:
-                #         param.requires_grad = False
-
-
-                # if p.requires_grad == False:
-                #     continue
-
-
-                # g = g.cuda()
                 d_p = p.grad.data + group['mu'] * (p.data - g.data)
                 p.data.add_(d_p, alpha=-group['lr'])
 
@@ -286,21 +273,21 @@ class PerturbedGradientDescent(Optimizer):
 # Validation function
 ##############################################################################
 
-def validate(args, node, which_dataset = 'validate'):
-    node.model.cuda().eval() 
+def validate(args, node, which_dataset='validate'):
+    node.model.cuda().eval()
 
     # Dequantize the model parameters before validation
     for name, param in node.model.named_parameters():
         if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
-            param.data = server_funct.dequantize(param.data, param.scale, param.zero_point)
-    
+            param.data = dequantize(param.data, param.scale, param.zero_point)
+
     if which_dataset == 'validate':
         test_loader = node.validate_set
     elif which_dataset == 'local':
         test_loader = node.local_data
     else:
         raise ValueError('Undefined...')
-    
+
     correct = 0.0
     with torch.no_grad():
         for idx, (data, target) in enumerate(test_loader):
@@ -312,8 +299,14 @@ def validate(args, node, which_dataset = 'validate'):
         acc = correct / len(test_loader.dataset) * 100
     return acc
 
-def testloss(args, node, which_dataset = 'validate'):
-    node.model.cuda().eval()  
+def testloss(args, node, which_dataset='validate'):
+    node.model.cuda().eval()
+   
+    # Dequantize the model parameters before testing
+    for name, param in node.model.named_parameters():
+        if hasattr(param, 'scale') and hasattr(param, 'zero_point'):
+            param.data = dequantize(param.data, param.scale, param.zero_point)
+   
     if which_dataset == 'validate':
         test_loader = node.validate_set
     elif which_dataset == 'local':
@@ -326,13 +319,13 @@ def testloss(args, node, which_dataset = 'validate'):
         for idx, (data, target) in enumerate(test_loader):
             data, target = data.cuda(), target.cuda()
             output = node.model(data)
-            loss_local =  F.cross_entropy(output, target, reduction='mean')
+            loss_local = F.cross_entropy(output, target, reduction='mean')
             loss.append(loss_local.item())
-    loss_value = sum(loss)/len(loss)
+    loss_value = sum(loss) / len(loss)
     return loss_value
 
 # Functions for FedLAW with param as an input
-def validate_with_param(args, node, param, which_dataset = 'validate'):
+def validate_with_param(args, node, param, which_dataset='validate'):
     node.model.cuda().eval()
     if which_dataset == 'validate':
         test_loader = node.validate_set
@@ -351,8 +344,8 @@ def validate_with_param(args, node, param, which_dataset = 'validate'):
         acc = correct / len(test_loader.dataset) * 100
     return acc
 
-def testloss_with_param(args, node, param, which_dataset = 'validate'):
-    node.model.cuda().eval()  
+def testloss_with_param(args, node, param, which_dataset='validate'):
+    node.model.cuda().eval()
     if which_dataset == 'validate':
         test_loader = node.validate_set
     elif which_dataset == 'local':
@@ -365,7 +358,7 @@ def testloss_with_param(args, node, param, which_dataset = 'validate'):
         for idx, (data, target) in enumerate(test_loader):
             data, target = data.cuda(), target.cuda()
             output = node.model.forward_with_param(data, param)
-            loss_local =  F.cross_entropy(output, target, reduction='mean')
+            loss_local = F.cross_entropy(output, target, reduction='mean')
             loss.append(loss_local.item())
-    loss_value = sum(loss)/len(loss)
+    loss_value = sum(loss) / len(loss)
     return loss_value
