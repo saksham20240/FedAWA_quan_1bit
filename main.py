@@ -252,7 +252,31 @@ def generate_comprehensive_client_table(client_metrics, round_num, args):
     
     print(f"{'='*200}")
 
-def save_round_metrics_to_csv(client_metrics, round_num, args):
+def safe_apply_onebit_quantization(model, model_name, quantization_method='onebit', onebit_method='nmf'):
+    """Safely apply OneBit quantization with proper error handling"""
+    try:
+        if hasattr(model, 'flat_w'):  # ReparamModule
+            print(f"   {model_name} is ReparamModule with {model.flat_w.numel():,} parameters")
+            if quantization_method == 'onebit':
+                quantization_time = model.quantize_flat_weights_onebit_comprehensive(method=onebit_method)
+            else:
+                quantization_time = model.quantize_flat_weights_comprehensive()
+            print(f"   ✅ ReparamModule quantization completed in {quantization_time:.4f}s")
+            return True
+        else:  # Standard model
+            print(f"   {model_name} is standard model")
+            converted_layers, total_layers = convert_model_to_onebit(model)
+            if converted_layers > 0:
+                quantize_all_layers(model)
+                print(f"   ✅ Standard model conversion completed ({converted_layers}/{total_layers} layers)")
+                return True
+            else:
+                print(f"   ⚠️ No layers could be converted (possibly already quantized or no Linear layers)")
+                return False
+    except Exception as e:
+        print(f"   ❌ Error applying OneBit to {model_name}: {e}")
+        print(f"   🔄 Continuing with original model...")
+        return False
     """Save round metrics to CSV file"""
     
     if not (hasattr(args, 'save_metrics_csv') and args.save_metrics_csv):
@@ -315,17 +339,9 @@ def run_enhanced_federated_learning(args):
     central_node = Node(-1, data.test_loader[0], data.test_set, args)
     central_node.model.model_id = 'central'
     
-    # Apply OneBit conversion if enabled
-    if args.use_onebit_training:
-        print("🔧 Converting central model to OneBit...")
-        if hasattr(central_node.model, 'flat_w'):  # ReparamModule
-            if args.quantization_method == 'onebit':
-                central_node.model.quantize_flat_weights_onebit_comprehensive(method=args.onebit_method)
-            else:
-                central_node.model.quantize_flat_weights_comprehensive()
-        else:  # Standard model
-            convert_model_to_onebit(central_node.model)
-            quantize_all_layers(central_node.model)
+    # Apply OneBit conversion if enabled (defer until after all nodes are created)
+    print(f"🔧 Central model type: {type(central_node.model).__name__}")
+    print(f"🔧 OneBit training enabled: {args.use_onebit_training}")
     
     # Initialize the client nodes
     print(f"\n👥 Initializing {args.node_num} client nodes...")
@@ -333,17 +349,47 @@ def run_enhanced_federated_learning(args):
     for i in range(args.node_num): 
         client_nodes[i] = Node(i, data.train_loader[i], data.train_set, args)
         client_nodes[i].model.model_id = f'client_{i}'
+        print(f"🔧 Client {i} model type: {type(client_nodes[i].model).__name__}")
+    
+    # Apply OneBit conversion AFTER all nodes are created
+    if args.use_onebit_training:
+        print("\n🔧 Applying OneBit quantization to all models...")
         
-        # Apply OneBit conversion if enabled
-        if args.use_onebit_training:
-            if hasattr(client_nodes[i].model, 'flat_w'):  # ReparamModule
-                if args.quantization_method == 'onebit':
-                    client_nodes[i].model.quantize_flat_weights_onebit_comprehensive(method=args.onebit_method)
-                else:
-                    client_nodes[i].model.quantize_flat_weights_comprehensive()
-            else:  # Standard model
-                convert_model_to_onebit(client_nodes[i].model)
-                quantize_all_layers(client_nodes[i].model)
+    # Apply OneBit conversion AFTER all nodes are created
+    if args.use_onebit_training:
+        print("\n🔧 Applying OneBit quantization to all models...")
+        
+        # Convert central model
+        print("🔧 Converting central model to OneBit...")
+        central_success = safe_apply_onebit_quantization(
+            central_node.model, 
+            "Central model", 
+            args.quantization_method, 
+            args.onebit_method
+        )
+        
+        # Convert client models
+        client_successes = []
+        for i in range(args.node_num):
+            print(f"🔧 Converting client {i} model to OneBit...")
+            success = safe_apply_onebit_quantization(
+                client_nodes[i].model, 
+                f"Client {i} model", 
+                args.quantization_method, 
+                args.onebit_method
+            )
+            client_successes.append(success)
+        
+        # Summary
+        successful_clients = sum(client_successes)
+        print(f"\n📊 OneBit Conversion Summary:")
+        print(f"   Central model: {'✅ Success' if central_success else '❌ Failed'}")
+        print(f"   Client models: {successful_clients}/{args.node_num} successful")
+        
+        if not central_success and successful_clients == 0:
+            print("   ⚠️ Warning: No models were successfully quantized!")
+            print("   🔄 Continuing with standard federated learning...")
+            args.use_onebit_training = False
     
     # Training tracking variables
     final_test_acc_recorder = RunningAverage()
