@@ -243,7 +243,7 @@ def generate_comprehensive_client_table(client_metrics, round_num, args):
             "Model Reduction(%)", "Compression(%)", "Quant Time(s)", "Avg Bit-Width", 
             "Accuracy(%)", "Adaptive Weight", "Data Weight", "Perf Weight", "Div Weight",
             "Comm Reduction(%)", "CPU(%)", "Power(W)", "Edge Compat", "Efficiency",
-            "Quantization Method", "Flat_w Params", "Vector Params"
+            "Quantization Method"
         ]
         
         rows = []
@@ -272,9 +272,7 @@ def generate_comprehensive_client_table(client_metrics, round_num, args):
                 f"{metrics.get('power_consumption', 0):.1f}",
                 metrics.get('edge_compatibility', 'Unknown'),
                 metrics.get('efficiency_rating', 'Unknown'),
-                metrics.get('quantization_method', 'Unknown'),
-                f"{metrics.get('flat_w_params', 0):,}",
-                f"{metrics.get('vector_params', 0):,}"
+                metrics.get('quantization_method', 'Unknown')
             ]
             rows.append(row)
         
