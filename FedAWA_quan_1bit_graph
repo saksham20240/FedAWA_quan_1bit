@@ -1,0 +1,1306 @@
+(base) ds_saksham@cheetah:~$ conda activate fedawa1bitjune20
+(fedawa1bitjune20) ds_saksham@cheetah:~$ cd /storage/ds_saksham/
+(fedawa1bitjune20) ds_saksham@cheetah:/storage/ds_saksham$ ls
+anaconda			     FedAWA	  FedAWA_quan_1bit	   FedAWA_quan_1bit_resnet101_graphs
+Anaconda3-2024.10-1-Linux-x86_64.sh  FedAWA_quan  FedAWA_quan_1bit_graphs  FedAWA_quan_1bit_resnet50_graphs
+(fedawa1bitjune20) ds_saksham@cheetah:/storage/ds_saksham$ cd FedAWA_quan_1bit_graphs
+(fedawa1bitjune20) ds_saksham@cheetah:/storage/ds_saksham/FedAWA_quan_1bit_graphs$ CUDA_VISIBLE_DEVICES=7 python main.py   --dataset cifar100   --noniid_type dirichlet   --dirichlet_alpha 0.5   --batchsize 32   --validate_batchsize 32 
+🚀 Starting OneBit + FedAwa Federated Learning
+📋 Configuration: 20 clients, 300 rounds
+📊 CSV files and WandB plots will be generated for each round...
+wandb: Currently logged in as: s24114 (phyve) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.20.1
+wandb: Run data is saved locally in /storage/ds_saksham/FedAWA_quan_1bit_graphs/wandb/run-20250621_190257-xjco2yml
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run OnebitFedAwa_fedawa_20clients_300rounds
+wandb: ⭐️ View project at https://wandb.ai/phyve/onebit-fedawa-fl
+wandb: 🚀 View run at https://wandb.ai/phyve/onebit-fedawa-fl/runs/xjco2yml
+✅ WandB initialized successfully
+✅ Data loaded successfully
+✅ Successfully initialized model for node -1
+✅ Successfully initialized optimizer for node -1
+✅ Successfully initialized model for node 0
+✅ Successfully initialized optimizer for node 0
+✅ Successfully initialized model for node 1
+✅ Successfully initialized optimizer for node 1
+✅ Successfully initialized model for node 2
+✅ Successfully initialized optimizer for node 2
+✅ Successfully initialized model for node 3
+✅ Successfully initialized optimizer for node 3
+✅ Successfully initialized model for node 4
+✅ Successfully initialized optimizer for node 4
+✅ Successfully initialized model for node 5
+✅ Successfully initialized optimizer for node 5
+✅ Successfully initialized model for node 6
+✅ Successfully initialized optimizer for node 6
+✅ Successfully initialized model for node 7
+✅ Successfully initialized optimizer for node 7
+✅ Successfully initialized model for node 8
+✅ Successfully initialized optimizer for node 8
+✅ Successfully initialized model for node 9
+✅ Successfully initialized optimizer for node 9
+✅ Successfully initialized model for node 10
+✅ Successfully initialized optimizer for node 10
+✅ Successfully initialized model for node 11
+✅ Successfully initialized optimizer for node 11
+✅ Successfully initialized model for node 12
+✅ Successfully initialized optimizer for node 12
+✅ Successfully initialized model for node 13
+✅ Successfully initialized optimizer for node 13
+✅ Successfully initialized model for node 14
+✅ Successfully initialized optimizer for node 14
+✅ Successfully initialized model for node 15
+✅ Successfully initialized optimizer for node 15
+✅ Successfully initialized model for node 16
+✅ Successfully initialized optimizer for node 16
+✅ Successfully initialized model for node 17
+✅ Successfully initialized optimizer for node 17
+✅ Successfully initialized model for node 18
+✅ Successfully initialized optimizer for node 18
+✅ Successfully initialized model for node 19
+✅ Successfully initialized optimizer for node 19
+🔧 Converting models to OneBit...
+Central ReparamModule: OneBit quantization completed in 0.0963s
+Successfully converted 20/20 client models
+📋 Round 1/300
+Round 1: Global test acc: 1.0000
+✅ Round 1 metrics saved to round_1_client_metrics.csv
+📋 Round 2/300
+Round 2: Global test acc: 1.0000
+✅ Round 2 metrics saved to round_2_client_metrics.csv
+📋 Round 3/300
+Round 3: Global test acc: 1.0000
+✅ Round 3 metrics saved to round_3_client_metrics.csv
+📋 Round 4/300
+Round 4: Global test acc: 1.0000
+✅ Round 4 metrics saved to round_4_client_metrics.csv
+📋 Round 5/300
+Round 5: Global test acc: 1.0000
+✅ Round 5 metrics saved to round_5_client_metrics.csv
+📋 Round 6/300
+Round 6: Global test acc: 1.0000
+✅ Round 6 metrics saved to round_6_client_metrics.csv
+📋 Round 7/300
+Round 7: Global test acc: 1.0000
+✅ Round 7 metrics saved to round_7_client_metrics.csv
+📋 Round 8/300
+Round 8: Global test acc: 1.0000
+✅ Round 8 metrics saved to round_8_client_metrics.csv
+📋 Round 9/300
+Round 9: Global test acc: 1.0000
+✅ Round 9 metrics saved to round_9_client_metrics.csv
+📋 Round 10/300
+Round 10: Global test acc: 1.0000
+✅ Round 10 metrics saved to round_10_client_metrics.csv
+📋 Round 11/300
+Round 11: Global test acc: 1.0000
+✅ Round 11 metrics saved to round_11_client_metrics.csv
+📋 Round 12/300
+Round 12: Global test acc: 1.0000
+✅ Round 12 metrics saved to round_12_client_metrics.csv
+📋 Round 13/300
+Round 13: Global test acc: 1.0000
+✅ Round 13 metrics saved to round_13_client_metrics.csv
+📋 Round 14/300
+Round 14: Global test acc: 1.0000
+✅ Round 14 metrics saved to round_14_client_metrics.csv
+📋 Round 15/300
+Round 15: Global test acc: 1.0000
+✅ Round 15 metrics saved to round_15_client_metrics.csv
+📋 Round 16/300
+Round 16: Global test acc: 1.0000
+✅ Round 16 metrics saved to round_16_client_metrics.csv
+📋 Round 17/300
+Round 17: Global test acc: 1.0000
+✅ Round 17 metrics saved to round_17_client_metrics.csv
+📋 Round 18/300
+Round 18: Global test acc: 1.0000
+✅ Round 18 metrics saved to round_18_client_metrics.csv
+📋 Round 19/300
+Round 19: Global test acc: 1.0000
+✅ Round 19 metrics saved to round_19_client_metrics.csv
+📋 Round 20/300
+Round 20: Global test acc: 1.0000
+✅ Round 20 metrics saved to round_20_client_metrics.csv
+📋 Round 21/300
+Round 21: Global test acc: 1.0000
+✅ Round 21 metrics saved to round_21_client_metrics.csv
+📋 Round 22/300
+Round 22: Global test acc: 1.0000
+✅ Round 22 metrics saved to round_22_client_metrics.csv
+📋 Round 23/300
+Round 23: Global test acc: 1.0000
+✅ Round 23 metrics saved to round_23_client_metrics.csv
+📋 Round 24/300
+Round 24: Global test acc: 1.0000
+✅ Round 24 metrics saved to round_24_client_metrics.csv
+📋 Round 25/300
+Round 25: Global test acc: 1.0000
+✅ Round 25 metrics saved to round_25_client_metrics.csv
+📋 Round 26/300
+Round 26: Global test acc: 1.0000
+✅ Round 26 metrics saved to round_26_client_metrics.csv
+📋 Round 27/300
+Round 27: Global test acc: 1.0000
+✅ Round 27 metrics saved to round_27_client_metrics.csv
+📋 Round 28/300
+Round 28: Global test acc: 1.0000
+✅ Round 28 metrics saved to round_28_client_metrics.csv
+📋 Round 29/300
+Round 29: Global test acc: 1.0000
+✅ Round 29 metrics saved to round_29_client_metrics.csv
+📋 Round 30/300
+Round 30: Global test acc: 1.0000
+✅ Round 30 metrics saved to round_30_client_metrics.csv
+📋 Round 31/300
+Round 31: Global test acc: 1.0000
+✅ Round 31 metrics saved to round_31_client_metrics.csv
+📋 Round 32/300
+Round 32: Global test acc: 1.0000
+✅ Round 32 metrics saved to round_32_client_metrics.csv
+📋 Round 33/300
+Round 33: Global test acc: 1.0000
+✅ Round 33 metrics saved to round_33_client_metrics.csv
+📋 Round 34/300
+Round 34: Global test acc: 1.0000
+✅ Round 34 metrics saved to round_34_client_metrics.csv
+📋 Round 35/300
+Round 35: Global test acc: 1.0000
+✅ Round 35 metrics saved to round_35_client_metrics.csv
+📋 Round 36/300
+Round 36: Global test acc: 1.0000
+✅ Round 36 metrics saved to round_36_client_metrics.csv
+📋 Round 37/300
+Round 37: Global test acc: 1.0000
+✅ Round 37 metrics saved to round_37_client_metrics.csv
+📋 Round 38/300
+Round 38: Global test acc: 1.0000
+✅ Round 38 metrics saved to round_38_client_metrics.csv
+📋 Round 39/300
+Round 39: Global test acc: 1.0000
+✅ Round 39 metrics saved to round_39_client_metrics.csv
+📋 Round 40/300
+Round 40: Global test acc: 1.0000
+✅ Round 40 metrics saved to round_40_client_metrics.csv
+📋 Round 41/300
+Round 41: Global test acc: 1.0000
+✅ Round 41 metrics saved to round_41_client_metrics.csv
+📋 Round 42/300
+Round 42: Global test acc: 1.0000
+✅ Round 42 metrics saved to round_42_client_metrics.csv
+📋 Round 43/300
+Round 43: Global test acc: 1.0000
+✅ Round 43 metrics saved to round_43_client_metrics.csv
+📋 Round 44/300
+Round 44: Global test acc: 1.0000
+✅ Round 44 metrics saved to round_44_client_metrics.csv
+📋 Round 45/300
+Round 45: Global test acc: 1.0000
+✅ Round 45 metrics saved to round_45_client_metrics.csv
+📋 Round 46/300
+Round 46: Global test acc: 1.0000
+✅ Round 46 metrics saved to round_46_client_metrics.csv
+📋 Round 47/300
+Round 47: Global test acc: 1.0000
+✅ Round 47 metrics saved to round_47_client_metrics.csv
+📋 Round 48/300
+Round 48: Global test acc: 1.0000
+✅ Round 48 metrics saved to round_48_client_metrics.csv
+📋 Round 49/300
+Round 49: Global test acc: 1.0000
+✅ Round 49 metrics saved to round_49_client_metrics.csv
+📋 Round 50/300
+Round 50: Global test acc: 1.0000
+✅ Round 50 metrics saved to round_50_client_metrics.csv
+📋 Round 51/300
+Round 51: Global test acc: 1.0000
+✅ Round 51 metrics saved to round_51_client_metrics.csv
+📋 Round 52/300
+Round 52: Global test acc: 1.0000
+✅ Round 52 metrics saved to round_52_client_metrics.csv
+📋 Round 53/300
+Round 53: Global test acc: 1.0000
+✅ Round 53 metrics saved to round_53_client_metrics.csv
+📋 Round 54/300
+Round 54: Global test acc: 1.0000
+✅ Round 54 metrics saved to round_54_client_metrics.csv
+📋 Round 55/300
+Round 55: Global test acc: 1.0000
+✅ Round 55 metrics saved to round_55_client_metrics.csv
+📋 Round 56/300
+Round 56: Global test acc: 1.0000
+✅ Round 56 metrics saved to round_56_client_metrics.csv
+📋 Round 57/300
+Round 57: Global test acc: 1.0000
+✅ Round 57 metrics saved to round_57_client_metrics.csv
+📋 Round 58/300
+Round 58: Global test acc: 1.0000
+✅ Round 58 metrics saved to round_58_client_metrics.csv
+📋 Round 59/300
+Round 59: Global test acc: 1.0000
+✅ Round 59 metrics saved to round_59_client_metrics.csv
+📋 Round 60/300
+Round 60: Global test acc: 1.0000
+✅ Round 60 metrics saved to round_60_client_metrics.csv
+📋 Round 61/300
+Round 61: Global test acc: 1.0000
+✅ Round 61 metrics saved to round_61_client_metrics.csv
+📋 Round 62/300
+Round 62: Global test acc: 1.0000
+✅ Round 62 metrics saved to round_62_client_metrics.csv
+📋 Round 63/300
+Round 63: Global test acc: 1.0000
+✅ Round 63 metrics saved to round_63_client_metrics.csv
+📋 Round 64/300
+Round 64: Global test acc: 1.0000
+✅ Round 64 metrics saved to round_64_client_metrics.csv
+📋 Round 65/300
+Round 65: Global test acc: 1.0000
+✅ Round 65 metrics saved to round_65_client_metrics.csv
+📋 Round 66/300
+Round 66: Global test acc: 1.0000
+✅ Round 66 metrics saved to round_66_client_metrics.csv
+📋 Round 67/300
+Round 67: Global test acc: 1.0000
+✅ Round 67 metrics saved to round_67_client_metrics.csv
+📋 Round 68/300
+Round 68: Global test acc: 1.0000
+✅ Round 68 metrics saved to round_68_client_metrics.csv
+📋 Round 69/300
+Round 69: Global test acc: 1.0000
+✅ Round 69 metrics saved to round_69_client_metrics.csv
+📋 Round 70/300
+Round 70: Global test acc: 1.0000
+✅ Round 70 metrics saved to round_70_client_metrics.csv
+📋 Round 71/300
+Round 71: Global test acc: 1.0000
+✅ Round 71 metrics saved to round_71_client_metrics.csv
+📋 Round 72/300
+Round 72: Global test acc: 1.0000
+✅ Round 72 metrics saved to round_72_client_metrics.csv
+📋 Round 73/300
+Round 73: Global test acc: 1.0000
+✅ Round 73 metrics saved to round_73_client_metrics.csv
+📋 Round 74/300
+Round 74: Global test acc: 1.0000
+✅ Round 74 metrics saved to round_74_client_metrics.csv
+📋 Round 75/300
+Round 75: Global test acc: 1.0000
+✅ Round 75 metrics saved to round_75_client_metrics.csv
+📋 Round 76/300
+Round 76: Global test acc: 1.0000
+✅ Round 76 metrics saved to round_76_client_metrics.csv
+📋 Round 77/300
+Round 77: Global test acc: 1.0000
+✅ Round 77 metrics saved to round_77_client_metrics.csv
+📋 Round 78/300
+Round 78: Global test acc: 1.0000
+✅ Round 78 metrics saved to round_78_client_metrics.csv
+📋 Round 79/300
+Round 79: Global test acc: 1.0000
+✅ Round 79 metrics saved to round_79_client_metrics.csv
+📋 Round 80/300
+Round 80: Global test acc: 1.0000
+✅ Round 80 metrics saved to round_80_client_metrics.csv
+📋 Round 81/300
+Round 81: Global test acc: 1.0000
+✅ Round 81 metrics saved to round_81_client_metrics.csv
+📋 Round 82/300
+Round 82: Global test acc: 1.0000
+✅ Round 82 metrics saved to round_82_client_metrics.csv
+📋 Round 83/300
+Round 83: Global test acc: 1.0000
+✅ Round 83 metrics saved to round_83_client_metrics.csv
+📋 Round 84/300
+Round 84: Global test acc: 1.0000
+✅ Round 84 metrics saved to round_84_client_metrics.csv
+📋 Round 85/300
+Round 85: Global test acc: 1.0000
+✅ Round 85 metrics saved to round_85_client_metrics.csv
+📋 Round 86/300
+Round 86: Global test acc: 1.0000
+✅ Round 86 metrics saved to round_86_client_metrics.csv
+📋 Round 87/300
+Round 87: Global test acc: 1.0000
+✅ Round 87 metrics saved to round_87_client_metrics.csv
+📋 Round 88/300
+Round 88: Global test acc: 1.0000
+✅ Round 88 metrics saved to round_88_client_metrics.csv
+📋 Round 89/300
+Round 89: Global test acc: 1.0000
+✅ Round 89 metrics saved to round_89_client_metrics.csv
+📋 Round 90/300
+Round 90: Global test acc: 1.0000
+✅ Round 90 metrics saved to round_90_client_metrics.csv
+📋 Round 91/300
+Round 91: Global test acc: 1.0000
+✅ Round 91 metrics saved to round_91_client_metrics.csv
+📋 Round 92/300
+Round 92: Global test acc: 1.0000
+✅ Round 92 metrics saved to round_92_client_metrics.csv
+📋 Round 93/300
+Round 93: Global test acc: 1.0000
+✅ Round 93 metrics saved to round_93_client_metrics.csv
+📋 Round 94/300
+Round 94: Global test acc: 1.0000
+✅ Round 94 metrics saved to round_94_client_metrics.csv
+📋 Round 95/300
+Round 95: Global test acc: 1.0000
+✅ Round 95 metrics saved to round_95_client_metrics.csv
+📋 Round 96/300
+Round 96: Global test acc: 1.0000
+✅ Round 96 metrics saved to round_96_client_metrics.csv
+📋 Round 97/300
+Round 97: Global test acc: 1.0000
+✅ Round 97 metrics saved to round_97_client_metrics.csv
+📋 Round 98/300
+Round 98: Global test acc: 1.0000
+✅ Round 98 metrics saved to round_98_client_metrics.csv
+📋 Round 99/300
+Round 99: Global test acc: 1.0000
+✅ Round 99 metrics saved to round_99_client_metrics.csv
+📋 Round 100/300
+Round 100: Global test acc: 1.0000
+✅ Round 100 metrics saved to round_100_client_metrics.csv
+📋 Round 101/300
+Round 101: Global test acc: 1.0000
+✅ Round 101 metrics saved to round_101_client_metrics.csv
+📋 Round 102/300
+Round 102: Global test acc: 1.0000
+✅ Round 102 metrics saved to round_102_client_metrics.csv
+📋 Round 103/300
+Round 103: Global test acc: 1.0000
+✅ Round 103 metrics saved to round_103_client_metrics.csv
+📋 Round 104/300
+Round 104: Global test acc: 1.0000
+✅ Round 104 metrics saved to round_104_client_metrics.csv
+📋 Round 105/300
+Round 105: Global test acc: 1.0000
+✅ Round 105 metrics saved to round_105_client_metrics.csv
+📋 Round 106/300
+Round 106: Global test acc: 1.0000
+✅ Round 106 metrics saved to round_106_client_metrics.csv
+📋 Round 107/300
+Round 107: Global test acc: 1.0000
+✅ Round 107 metrics saved to round_107_client_metrics.csv
+📋 Round 108/300
+Round 108: Global test acc: 1.0000
+✅ Round 108 metrics saved to round_108_client_metrics.csv
+📋 Round 109/300
+Round 109: Global test acc: 1.0000
+✅ Round 109 metrics saved to round_109_client_metrics.csv
+📋 Round 110/300
+Round 110: Global test acc: 1.0000
+✅ Round 110 metrics saved to round_110_client_metrics.csv
+📋 Round 111/300
+Round 111: Global test acc: 1.0000
+✅ Round 111 metrics saved to round_111_client_metrics.csv
+📋 Round 112/300
+Round 112: Global test acc: 1.0000
+✅ Round 112 metrics saved to round_112_client_metrics.csv
+📋 Round 113/300
+Round 113: Global test acc: 1.0000
+✅ Round 113 metrics saved to round_113_client_metrics.csv
+📋 Round 114/300
+Round 114: Global test acc: 1.0000
+✅ Round 114 metrics saved to round_114_client_metrics.csv
+📋 Round 115/300
+Round 115: Global test acc: 1.0000
+✅ Round 115 metrics saved to round_115_client_metrics.csv
+📋 Round 116/300
+Round 116: Global test acc: 1.0000
+✅ Round 116 metrics saved to round_116_client_metrics.csv
+📋 Round 117/300
+Round 117: Global test acc: 1.0000
+✅ Round 117 metrics saved to round_117_client_metrics.csv
+📋 Round 118/300
+Round 118: Global test acc: 1.0000
+✅ Round 118 metrics saved to round_118_client_metrics.csv
+📋 Round 119/300
+Round 119: Global test acc: 1.0000
+✅ Round 119 metrics saved to round_119_client_metrics.csv
+📋 Round 120/300
+Round 120: Global test acc: 1.0000
+✅ Round 120 metrics saved to round_120_client_metrics.csv
+📋 Round 121/300
+Round 121: Global test acc: 1.0000
+✅ Round 121 metrics saved to round_121_client_metrics.csv
+📋 Round 122/300
+Round 122: Global test acc: 1.0000
+✅ Round 122 metrics saved to round_122_client_metrics.csv
+📋 Round 123/300
+Round 123: Global test acc: 1.0000
+✅ Round 123 metrics saved to round_123_client_metrics.csv
+📋 Round 124/300
+Round 124: Global test acc: 1.0000
+✅ Round 124 metrics saved to round_124_client_metrics.csv
+📋 Round 125/300
+Round 125: Global test acc: 1.0000
+✅ Round 125 metrics saved to round_125_client_metrics.csv
+📋 Round 126/300
+Round 126: Global test acc: 1.0000
+✅ Round 126 metrics saved to round_126_client_metrics.csv
+📋 Round 127/300
+Round 127: Global test acc: 1.0000
+✅ Round 127 metrics saved to round_127_client_metrics.csv
+📋 Round 128/300
+Round 128: Global test acc: 1.0000
+✅ Round 128 metrics saved to round_128_client_metrics.csv
+📋 Round 129/300
+Round 129: Global test acc: 1.0000
+✅ Round 129 metrics saved to round_129_client_metrics.csv
+📋 Round 130/300
+Round 130: Global test acc: 1.0000
+✅ Round 130 metrics saved to round_130_client_metrics.csv
+📋 Round 131/300
+Round 131: Global test acc: 1.0000
+✅ Round 131 metrics saved to round_131_client_metrics.csv
+📋 Round 132/300
+Round 132: Global test acc: 1.0000
+✅ Round 132 metrics saved to round_132_client_metrics.csv
+📋 Round 133/300
+Round 133: Global test acc: 1.0000
+✅ Round 133 metrics saved to round_133_client_metrics.csv
+📋 Round 134/300
+Round 134: Global test acc: 1.0000
+✅ Round 134 metrics saved to round_134_client_metrics.csv
+📋 Round 135/300
+Round 135: Global test acc: 1.0000
+✅ Round 135 metrics saved to round_135_client_metrics.csv
+📋 Round 136/300
+Round 136: Global test acc: 1.0000
+✅ Round 136 metrics saved to round_136_client_metrics.csv
+📋 Round 137/300
+Round 137: Global test acc: 1.0000
+✅ Round 137 metrics saved to round_137_client_metrics.csv
+📋 Round 138/300
+Round 138: Global test acc: 1.0000
+✅ Round 138 metrics saved to round_138_client_metrics.csv
+📋 Round 139/300
+Round 139: Global test acc: 1.0000
+✅ Round 139 metrics saved to round_139_client_metrics.csv
+📋 Round 140/300
+Round 140: Global test acc: 1.0000
+✅ Round 140 metrics saved to round_140_client_metrics.csv
+📋 Round 141/300
+Round 141: Global test acc: 1.0000
+✅ Round 141 metrics saved to round_141_client_metrics.csv
+📋 Round 142/300
+Round 142: Global test acc: 1.0000
+✅ Round 142 metrics saved to round_142_client_metrics.csv
+📋 Round 143/300
+Round 143: Global test acc: 1.0000
+✅ Round 143 metrics saved to round_143_client_metrics.csv
+📋 Round 144/300
+Round 144: Global test acc: 1.0000
+✅ Round 144 metrics saved to round_144_client_metrics.csv
+📋 Round 145/300
+Round 145: Global test acc: 1.0000
+✅ Round 145 metrics saved to round_145_client_metrics.csv
+📋 Round 146/300
+Round 146: Global test acc: 1.0000
+✅ Round 146 metrics saved to round_146_client_metrics.csv
+📋 Round 147/300
+Round 147: Global test acc: 1.0000
+✅ Round 147 metrics saved to round_147_client_metrics.csv
+📋 Round 148/300
+Round 148: Global test acc: 1.0000
+✅ Round 148 metrics saved to round_148_client_metrics.csv
+📋 Round 149/300
+Round 149: Global test acc: 1.0000
+✅ Round 149 metrics saved to round_149_client_metrics.csv
+📋 Round 150/300
+Round 150: Global test acc: 1.0000
+✅ Round 150 metrics saved to round_150_client_metrics.csv
+📋 Round 151/300
+Round 151: Global test acc: 1.0000
+✅ Round 151 metrics saved to round_151_client_metrics.csv
+📋 Round 152/300
+Round 152: Global test acc: 1.0000
+✅ Round 152 metrics saved to round_152_client_metrics.csv
+📋 Round 153/300
+Round 153: Global test acc: 1.0000
+✅ Round 153 metrics saved to round_153_client_metrics.csv
+📋 Round 154/300
+Round 154: Global test acc: 1.0000
+✅ Round 154 metrics saved to round_154_client_metrics.csv
+📋 Round 155/300
+Round 155: Global test acc: 1.0000
+✅ Round 155 metrics saved to round_155_client_metrics.csv
+📋 Round 156/300
+Round 156: Global test acc: 1.0000
+✅ Round 156 metrics saved to round_156_client_metrics.csv
+📋 Round 157/300
+Round 157: Global test acc: 1.0000
+✅ Round 157 metrics saved to round_157_client_metrics.csv
+📋 Round 158/300
+Round 158: Global test acc: 1.0000
+✅ Round 158 metrics saved to round_158_client_metrics.csv
+📋 Round 159/300
+Round 159: Global test acc: 1.0000
+✅ Round 159 metrics saved to round_159_client_metrics.csv
+📋 Round 160/300
+Round 160: Global test acc: 1.0000
+✅ Round 160 metrics saved to round_160_client_metrics.csv
+📋 Round 161/300
+Round 161: Global test acc: 1.0000
+✅ Round 161 metrics saved to round_161_client_metrics.csv
+📋 Round 162/300
+Round 162: Global test acc: 1.0000
+✅ Round 162 metrics saved to round_162_client_metrics.csv
+📋 Round 163/300
+Round 163: Global test acc: 1.0000
+✅ Round 163 metrics saved to round_163_client_metrics.csv
+📋 Round 164/300
+Round 164: Global test acc: 1.0000
+✅ Round 164 metrics saved to round_164_client_metrics.csv
+📋 Round 165/300
+Round 165: Global test acc: 1.0000
+✅ Round 165 metrics saved to round_165_client_metrics.csv
+📋 Round 166/300
+Round 166: Global test acc: 1.0000
+✅ Round 166 metrics saved to round_166_client_metrics.csv
+📋 Round 167/300
+Round 167: Global test acc: 1.0000
+✅ Round 167 metrics saved to round_167_client_metrics.csv
+📋 Round 168/300
+Round 168: Global test acc: 1.0000
+✅ Round 168 metrics saved to round_168_client_metrics.csv
+📋 Round 169/300
+Round 169: Global test acc: 1.0000
+✅ Round 169 metrics saved to round_169_client_metrics.csv
+📋 Round 170/300
+Round 170: Global test acc: 1.0000
+✅ Round 170 metrics saved to round_170_client_metrics.csv
+📋 Round 171/300
+Round 171: Global test acc: 1.0000
+✅ Round 171 metrics saved to round_171_client_metrics.csv
+📋 Round 172/300
+Round 172: Global test acc: 1.0000
+✅ Round 172 metrics saved to round_172_client_metrics.csv
+📋 Round 173/300
+Round 173: Global test acc: 1.0000
+✅ Round 173 metrics saved to round_173_client_metrics.csv
+📋 Round 174/300
+Round 174: Global test acc: 1.0000
+✅ Round 174 metrics saved to round_174_client_metrics.csv
+📋 Round 175/300
+Round 175: Global test acc: 1.0000
+✅ Round 175 metrics saved to round_175_client_metrics.csv
+📋 Round 176/300
+Round 176: Global test acc: 1.0000
+✅ Round 176 metrics saved to round_176_client_metrics.csv
+📋 Round 177/300
+Round 177: Global test acc: 1.0000
+✅ Round 177 metrics saved to round_177_client_metrics.csv
+📋 Round 178/300
+Round 178: Global test acc: 1.0000
+✅ Round 178 metrics saved to round_178_client_metrics.csv
+📋 Round 179/300
+Round 179: Global test acc: 1.0000
+✅ Round 179 metrics saved to round_179_client_metrics.csv
+📋 Round 180/300
+Round 180: Global test acc: 1.0000
+✅ Round 180 metrics saved to round_180_client_metrics.csv
+📋 Round 181/300
+Round 181: Global test acc: 1.0000
+✅ Round 181 metrics saved to round_181_client_metrics.csv
+📋 Round 182/300
+Round 182: Global test acc: 1.0000
+✅ Round 182 metrics saved to round_182_client_metrics.csv
+📋 Round 183/300
+Round 183: Global test acc: 1.0000
+✅ Round 183 metrics saved to round_183_client_metrics.csv
+📋 Round 184/300
+Round 184: Global test acc: 1.0000
+✅ Round 184 metrics saved to round_184_client_metrics.csv
+📋 Round 185/300
+Round 185: Global test acc: 1.0000
+✅ Round 185 metrics saved to round_185_client_metrics.csv
+📋 Round 186/300
+Round 186: Global test acc: 1.0000
+✅ Round 186 metrics saved to round_186_client_metrics.csv
+📋 Round 187/300
+Round 187: Global test acc: 1.0000
+✅ Round 187 metrics saved to round_187_client_metrics.csv
+📋 Round 188/300
+Round 188: Global test acc: 1.0000
+✅ Round 188 metrics saved to round_188_client_metrics.csv
+📋 Round 189/300
+Round 189: Global test acc: 1.0000
+✅ Round 189 metrics saved to round_189_client_metrics.csv
+📋 Round 190/300
+Round 190: Global test acc: 1.0000
+✅ Round 190 metrics saved to round_190_client_metrics.csv
+📋 Round 191/300
+Round 191: Global test acc: 1.0000
+✅ Round 191 metrics saved to round_191_client_metrics.csv
+📋 Round 192/300
+Round 192: Global test acc: 1.0000
+✅ Round 192 metrics saved to round_192_client_metrics.csv
+📋 Round 193/300
+Round 193: Global test acc: 1.0000
+✅ Round 193 metrics saved to round_193_client_metrics.csv
+📋 Round 194/300
+Round 194: Global test acc: 1.0000
+✅ Round 194 metrics saved to round_194_client_metrics.csv
+📋 Round 195/300
+Round 195: Global test acc: 1.0000
+✅ Round 195 metrics saved to round_195_client_metrics.csv
+📋 Round 196/300
+Round 196: Global test acc: 1.0000
+✅ Round 196 metrics saved to round_196_client_metrics.csv
+📋 Round 197/300
+Round 197: Global test acc: 1.0000
+✅ Round 197 metrics saved to round_197_client_metrics.csv
+📋 Round 198/300
+Round 198: Global test acc: 1.0000
+✅ Round 198 metrics saved to round_198_client_metrics.csv
+📋 Round 199/300
+Round 199: Global test acc: 1.0000
+✅ Round 199 metrics saved to round_199_client_metrics.csv
+📋 Round 200/300
+Round 200: Global test acc: 1.0000
+✅ Round 200 metrics saved to round_200_client_metrics.csv
+📋 Round 201/300
+Round 201: Global test acc: 1.0000
+✅ Round 201 metrics saved to round_201_client_metrics.csv
+📋 Round 202/300
+Round 202: Global test acc: 1.0000
+✅ Round 202 metrics saved to round_202_client_metrics.csv
+📋 Round 203/300
+Round 203: Global test acc: 1.0000
+✅ Round 203 metrics saved to round_203_client_metrics.csv
+📋 Round 204/300
+Round 204: Global test acc: 1.0000
+✅ Round 204 metrics saved to round_204_client_metrics.csv
+📋 Round 205/300
+Round 205: Global test acc: 1.0000
+✅ Round 205 metrics saved to round_205_client_metrics.csv
+📋 Round 206/300
+Round 206: Global test acc: 1.0000
+✅ Round 206 metrics saved to round_206_client_metrics.csv
+📋 Round 207/300
+Round 207: Global test acc: 1.0000
+✅ Round 207 metrics saved to round_207_client_metrics.csv
+📋 Round 208/300
+Round 208: Global test acc: 1.0000
+✅ Round 208 metrics saved to round_208_client_metrics.csv
+📋 Round 209/300
+Round 209: Global test acc: 1.0000
+✅ Round 209 metrics saved to round_209_client_metrics.csv
+📋 Round 210/300
+Round 210: Global test acc: 1.0000
+✅ Round 210 metrics saved to round_210_client_metrics.csv
+📋 Round 211/300
+Round 211: Global test acc: 1.0000
+✅ Round 211 metrics saved to round_211_client_metrics.csv
+📋 Round 212/300
+Round 212: Global test acc: 1.0000
+✅ Round 212 metrics saved to round_212_client_metrics.csv
+📋 Round 213/300
+Round 213: Global test acc: 1.0000
+✅ Round 213 metrics saved to round_213_client_metrics.csv
+📋 Round 214/300
+Round 214: Global test acc: 1.0000
+✅ Round 214 metrics saved to round_214_client_metrics.csv
+📋 Round 215/300
+Round 215: Global test acc: 1.0000
+✅ Round 215 metrics saved to round_215_client_metrics.csv
+📋 Round 216/300
+Round 216: Global test acc: 1.0000
+✅ Round 216 metrics saved to round_216_client_metrics.csv
+📋 Round 217/300
+Round 217: Global test acc: 1.0000
+✅ Round 217 metrics saved to round_217_client_metrics.csv
+📋 Round 218/300
+Round 218: Global test acc: 1.0000
+✅ Round 218 metrics saved to round_218_client_metrics.csv
+📋 Round 219/300
+Round 219: Global test acc: 1.0000
+✅ Round 219 metrics saved to round_219_client_metrics.csv
+📋 Round 220/300
+Round 220: Global test acc: 1.0000
+✅ Round 220 metrics saved to round_220_client_metrics.csv
+📋 Round 221/300
+Round 221: Global test acc: 1.0000
+✅ Round 221 metrics saved to round_221_client_metrics.csv
+📋 Round 222/300
+Round 222: Global test acc: 1.0000
+✅ Round 222 metrics saved to round_222_client_metrics.csv
+📋 Round 223/300
+Round 223: Global test acc: 1.0000
+✅ Round 223 metrics saved to round_223_client_metrics.csv
+📋 Round 224/300
+Round 224: Global test acc: 1.0000
+✅ Round 224 metrics saved to round_224_client_metrics.csv
+📋 Round 225/300
+Round 225: Global test acc: 1.0000
+✅ Round 225 metrics saved to round_225_client_metrics.csv
+📋 Round 226/300
+Round 226: Global test acc: 1.0000
+✅ Round 226 metrics saved to round_226_client_metrics.csv
+📋 Round 227/300
+Round 227: Global test acc: 1.0000
+✅ Round 227 metrics saved to round_227_client_metrics.csv
+📋 Round 228/300
+Round 228: Global test acc: 1.0000
+✅ Round 228 metrics saved to round_228_client_metrics.csv
+📋 Round 229/300
+Round 229: Global test acc: 1.0000
+✅ Round 229 metrics saved to round_229_client_metrics.csv
+📋 Round 230/300
+Round 230: Global test acc: 1.0000
+✅ Round 230 metrics saved to round_230_client_metrics.csv
+📋 Round 231/300
+Round 231: Global test acc: 1.0000
+✅ Round 231 metrics saved to round_231_client_metrics.csv
+📋 Round 232/300
+Round 232: Global test acc: 1.0000
+✅ Round 232 metrics saved to round_232_client_metrics.csv
+📋 Round 233/300
+Round 233: Global test acc: 1.0000
+✅ Round 233 metrics saved to round_233_client_metrics.csv
+📋 Round 234/300
+Round 234: Global test acc: 1.0000
+✅ Round 234 metrics saved to round_234_client_metrics.csv
+📋 Round 235/300
+Round 235: Global test acc: 1.0000
+✅ Round 235 metrics saved to round_235_client_metrics.csv
+📋 Round 236/300
+Round 236: Global test acc: 1.0000
+✅ Round 236 metrics saved to round_236_client_metrics.csv
+📋 Round 237/300
+Round 237: Global test acc: 1.0000
+✅ Round 237 metrics saved to round_237_client_metrics.csv
+📋 Round 238/300
+Round 238: Global test acc: 1.0000
+✅ Round 238 metrics saved to round_238_client_metrics.csv
+📋 Round 239/300
+Round 239: Global test acc: 1.0000
+✅ Round 239 metrics saved to round_239_client_metrics.csv
+📋 Round 240/300
+Round 240: Global test acc: 1.0000
+✅ Round 240 metrics saved to round_240_client_metrics.csv
+📋 Round 241/300
+Round 241: Global test acc: 1.0000
+✅ Round 241 metrics saved to round_241_client_metrics.csv
+📋 Round 242/300
+Round 242: Global test acc: 1.0000
+✅ Round 242 metrics saved to round_242_client_metrics.csv
+📋 Round 243/300
+Round 243: Global test acc: 1.0000
+✅ Round 243 metrics saved to round_243_client_metrics.csv
+📋 Round 244/300
+Round 244: Global test acc: 1.0000
+✅ Round 244 metrics saved to round_244_client_metrics.csv
+📋 Round 245/300
+Round 245: Global test acc: 1.0000
+✅ Round 245 metrics saved to round_245_client_metrics.csv
+📋 Round 246/300
+Round 246: Global test acc: 1.0000
+✅ Round 246 metrics saved to round_246_client_metrics.csv
+📋 Round 247/300
+Round 247: Global test acc: 1.0000
+✅ Round 247 metrics saved to round_247_client_metrics.csv
+📋 Round 248/300
+Round 248: Global test acc: 1.0000
+✅ Round 248 metrics saved to round_248_client_metrics.csv
+📋 Round 249/300
+Round 249: Global test acc: 1.0000
+✅ Round 249 metrics saved to round_249_client_metrics.csv
+📋 Round 250/300
+Round 250: Global test acc: 1.0000
+✅ Round 250 metrics saved to round_250_client_metrics.csv
+📋 Round 251/300
+Round 251: Global test acc: 1.0000
+✅ Round 251 metrics saved to round_251_client_metrics.csv
+📋 Round 252/300
+Round 252: Global test acc: 1.0000
+✅ Round 252 metrics saved to round_252_client_metrics.csv
+📋 Round 253/300
+Round 253: Global test acc: 1.0000
+✅ Round 253 metrics saved to round_253_client_metrics.csv
+📋 Round 254/300
+Round 254: Global test acc: 1.0000
+✅ Round 254 metrics saved to round_254_client_metrics.csv
+📋 Round 255/300
+Round 255: Global test acc: 1.0000
+✅ Round 255 metrics saved to round_255_client_metrics.csv
+📋 Round 256/300
+Round 256: Global test acc: 1.0000
+✅ Round 256 metrics saved to round_256_client_metrics.csv
+📋 Round 257/300
+Round 257: Global test acc: 1.0000
+✅ Round 257 metrics saved to round_257_client_metrics.csv
+📋 Round 258/300
+Round 258: Global test acc: 1.0000
+✅ Round 258 metrics saved to round_258_client_metrics.csv
+📋 Round 259/300
+Round 259: Global test acc: 1.0000
+✅ Round 259 metrics saved to round_259_client_metrics.csv
+📋 Round 260/300
+Round 260: Global test acc: 1.0000
+✅ Round 260 metrics saved to round_260_client_metrics.csv
+📋 Round 261/300
+Round 261: Global test acc: 1.0000
+✅ Round 261 metrics saved to round_261_client_metrics.csv
+📋 Round 262/300
+Round 262: Global test acc: 1.0000
+✅ Round 262 metrics saved to round_262_client_metrics.csv
+📋 Round 263/300
+Round 263: Global test acc: 1.0000
+✅ Round 263 metrics saved to round_263_client_metrics.csv
+📋 Round 264/300
+Round 264: Global test acc: 1.0000
+✅ Round 264 metrics saved to round_264_client_metrics.csv
+📋 Round 265/300
+Round 265: Global test acc: 1.0000
+✅ Round 265 metrics saved to round_265_client_metrics.csv
+📋 Round 266/300
+Round 266: Global test acc: 1.0000
+✅ Round 266 metrics saved to round_266_client_metrics.csv
+📋 Round 267/300
+Round 267: Global test acc: 1.0000
+✅ Round 267 metrics saved to round_267_client_metrics.csv
+📋 Round 268/300
+Round 268: Global test acc: 1.0000
+✅ Round 268 metrics saved to round_268_client_metrics.csv
+📋 Round 269/300
+Round 269: Global test acc: 1.0000
+✅ Round 269 metrics saved to round_269_client_metrics.csv
+📋 Round 270/300
+Round 270: Global test acc: 1.0000
+✅ Round 270 metrics saved to round_270_client_metrics.csv
+📋 Round 271/300
+Round 271: Global test acc: 1.0000
+✅ Round 271 metrics saved to round_271_client_metrics.csv
+📋 Round 272/300
+Round 272: Global test acc: 1.0000
+✅ Round 272 metrics saved to round_272_client_metrics.csv
+📋 Round 273/300
+Round 273: Global test acc: 1.0000
+✅ Round 273 metrics saved to round_273_client_metrics.csv
+📋 Round 274/300
+Round 274: Global test acc: 1.0000
+✅ Round 274 metrics saved to round_274_client_metrics.csv
+📋 Round 275/300
+Round 275: Global test acc: 1.0000
+✅ Round 275 metrics saved to round_275_client_metrics.csv
+📋 Round 276/300
+Round 276: Global test acc: 1.0000
+✅ Round 276 metrics saved to round_276_client_metrics.csv
+📋 Round 277/300
+Round 277: Global test acc: 1.0000
+✅ Round 277 metrics saved to round_277_client_metrics.csv
+📋 Round 278/300
+Round 278: Global test acc: 1.0000
+✅ Round 278 metrics saved to round_278_client_metrics.csv
+📋 Round 279/300
+Round 279: Global test acc: 1.0000
+✅ Round 279 metrics saved to round_279_client_metrics.csv
+📋 Round 280/300
+Round 280: Global test acc: 1.0000
+✅ Round 280 metrics saved to round_280_client_metrics.csv
+📋 Round 281/300
+Round 281: Global test acc: 1.0000
+✅ Round 281 metrics saved to round_281_client_metrics.csv
+📋 Round 282/300
+Round 282: Global test acc: 1.0000
+✅ Round 282 metrics saved to round_282_client_metrics.csv
+📋 Round 283/300
+Round 283: Global test acc: 1.0000
+✅ Round 283 metrics saved to round_283_client_metrics.csv
+📋 Round 284/300
+Round 284: Global test acc: 1.0000
+✅ Round 284 metrics saved to round_284_client_metrics.csv
+📋 Round 285/300
+Round 285: Global test acc: 1.0000
+✅ Round 285 metrics saved to round_285_client_metrics.csv
+📋 Round 286/300
+Round 286: Global test acc: 1.0000
+✅ Round 286 metrics saved to round_286_client_metrics.csv
+📋 Round 287/300
+Round 287: Global test acc: 1.0000
+✅ Round 287 metrics saved to round_287_client_metrics.csv
+📋 Round 288/300
+Round 288: Global test acc: 1.0000
+✅ Round 288 metrics saved to round_288_client_metrics.csv
+📋 Round 289/300
+Round 289: Global test acc: 1.0000
+✅ Round 289 metrics saved to round_289_client_metrics.csv
+📋 Round 290/300
+Round 290: Global test acc: 1.0000
+✅ Round 290 metrics saved to round_290_client_metrics.csv
+📋 Round 291/300
+Round 291: Global test acc: 1.0000
+✅ Round 291 metrics saved to round_291_client_metrics.csv
+📋 Round 292/300
+Round 292: Global test acc: 1.0000
+✅ Round 292 metrics saved to round_292_client_metrics.csv
+📋 Round 293/300
+Round 293: Global test acc: 1.0000
+✅ Round 293 metrics saved to round_293_client_metrics.csv
+📋 Round 294/300
+Round 294: Global test acc: 1.0000
+✅ Round 294 metrics saved to round_294_client_metrics.csv
+📋 Round 295/300
+Round 295: Global test acc: 1.0000
+✅ Round 295 metrics saved to round_295_client_metrics.csv
+📋 Round 296/300
+Round 296: Global test acc: 1.0000
+✅ Round 296 metrics saved to round_296_client_metrics.csv
+📋 Round 297/300
+Round 297: Global test acc: 1.0000
+✅ Round 297 metrics saved to round_297_client_metrics.csv
+📋 Round 298/300
+Round 298: Global test acc: 1.0000
+✅ Round 298 metrics saved to round_298_client_metrics.csv
+📋 Round 299/300
+Round 299: Global test acc: 1.0000
+✅ Round 299 metrics saved to round_299_client_metrics.csv
+📋 Round 300/300
+Round 300: Global test acc: 1.0000
+✅ Round 300 metrics saved to round_300_client_metrics.csv
+📊 Creating final client plots...
+📊 Creating individual client plots...
+  Creating Average Training Loss plots for all clients...
+  Creating Memory Reduction (MB) plots for all clients...
+  Creating Model Size Reduction (MB) plots for all clients...
+  Creating OneBit Inference Accuracy (%) plots for all clients...
+  Creating Communication Reduction (%) plots for all clients...
+✅ Individual client plots created successfully
+✅ Training completed! All CSV files generated.
+📊 WandB logging completed. Check your WandB dashboard for detailed plots and metrics.
+🔗 WandB Project URL: https://wandb.ai/your-username/onebit-fedawa-fl
+
+✅ All rounds completed successfully!
+📊 CSV files generated for each round in current directory.
+🎯 Check your WandB dashboard for interactive plots and detailed analysis.
+📈 Individual client plots created for:
+  - Average Training Loss vs Rounds
+  - Memory Reduction (MB) vs Rounds
+  - Model Size Reduction (MB) vs Rounds
+  - OneBit Inference Accuracy (%) vs Rounds
+  - Communication Reduction (%) vs Rounds
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:       avg_communication_reduction ▁▂▃▃▄▅▆▇████████████████████████████████
+wandb:             avg_compression_ratio ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:           avg_memory_reduction_mb ▅▅▆▄▁▅▅▄▇▃▃▅▅▄▅▅▅▄▅▄▅▅▂█▇▂▄▆▂▄▃▃▅▄▄▄▃▅▅▄
+wandb:          avg_memory_reduction_pct ▄▃▅▄▆▇▆▄▂▃▄▅▅█▅▄▅▇▂▃▄▃▃▅▆▁▃▅▁▂▃▄▆▅▄▆▄▁▃▅
+wandb:       avg_model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:               avg_onebit_accuracy ▁███████████████████████████████████████
+wandb:             avg_power_consumption ▂▄▁▂▄▁▃▅▅▅▁▄▁▅█▄▄▄▅▄▃▅▅▇▃▅▅▃▃▁▄▄▅▅▅▄▃▄▃▅
+wandb:                 avg_training_loss █▇▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_00/adaptive_weight ▃▆▅▃▅▃▅▃█▃▄▃▅▇▇▅▅█▄▇▇▄▆▁▄▆▆▄▅▆▇██▄▆▄█▅▄▅
+wandb: client_00/communication_reduction ▁▂▂▃▃▅▅▆▆▇██████████████████████████████
+wandb:     client_00/memory_reduction_mb ▁▇▆▃▆██▅▄▅▇█▃▇▇▄▂▂▇▆▄▄▂▂▂▅▅▅▂▇▁▅▆▁▆▃▅█▅▃
+wandb: client_00/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_00/onebit_accuracy ▁███████████████████████████████████████
+wandb:       client_00/power_consumption ▁▅█▂▄▄▂█▄▄▇█▇▄▇▇▂▁▇█▇▅▄▁▇▄▄▁▄▄▂▂▂▅█▅▄▅▂█
+wandb:           client_00/training_loss █▆▅▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_01/adaptive_weight ▅▃▃▃▄▄▅▃▇▄▂▂▅▄▃█▄▄▃▂▁▅▃▅▆▄▂▄▆▄▄▆▅▄▆▄▂▇▃▆
+wandb: client_01/communication_reduction ▁▂▂▃▃▄▅▇▇▇██████████████████████████████
+wandb:     client_01/memory_reduction_mb █▁▄▃▄▃▄▃▁▅▄▂▃▄▇▇▇▅▅▃▁▂▆▁▆▇▃▆▅▇▁▃█▄▆▄▆▆█▄
+wandb: client_01/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_01/onebit_accuracy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       client_01/power_consumption ▇▄▂▄▄▂▂▂▅▂▂▇▂█▁▁▂▅▅▂▄▂▅▄▄▇▇▅▂▄▇▇▅▅▄▅▂▄▅▇
+wandb:           client_01/training_loss █▇▅▆▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_02/adaptive_weight ▆▆▄▆▅▅▆█▆▅▄▇▄▅▅▃▆▄▆▅▃▆▅▆▁▆▅▅▄▅▆▇▆▇▄▅▇▄▄▅
+wandb: client_02/communication_reduction ▁▂▂▂▃▄██████████████████████████████████
+wandb:     client_02/memory_reduction_mb █▃▆▃▂▃▇▅▇▇▅▄▃▂▆▂▁▇▄▁▇▄▅▆▂▇▃▆▄█▇▁▂▆▇▄█▃▃▃
+wandb: client_02/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_02/onebit_accuracy ▁███████████████████████████████████████
+wandb:       client_02/power_consumption ▅▅▂▂▂▇▇█▇▇▇▄█▂▄▇▂▇█▅█▇▇▂▁▄▇▄▇▁▂█▂▅█▁▅▄▂▄
+wandb:           client_02/training_loss █▆▆▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_03/adaptive_weight ▆▇▅▆▆▇▅▇▇▄▁▇▂▇▅▃▅▃▆▆▄▇▅▂▄▅▃▇▅▃▅▄▄▇▆▇▅█▅▆
+wandb: client_03/communication_reduction ▁▁▃▄▄▆▆▇▇███████████████████████████████
+wandb:     client_03/memory_reduction_mb ▁▂▆▅█▄▆▄▇▅▆▆▄█▃▃▇▇█▃▆▄▃▃▇▃▆▆▃▅▇▇▂▂▇▃▆▆▂▁
+wandb: client_03/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_03/onebit_accuracy ▁███████████████████████████████████████
+wandb:       client_03/power_consumption █▇▁▅▄▁▄▅▂▇█▂█▇█▇▁▁▄▅▂▄▄▅█▄▂▅▁▇█▇▇▂█▅▅▄▅▁
+wandb:           client_03/training_loss █▃▆▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_04/adaptive_weight ▂▆█▄▃▄▅▅▃▃▂▇▅▁▆▇▃▆▂▇▁▄▅▅▇▅▇▃▂▇▂▇▄▆▃▄▃▄▅▇
+wandb: client_04/communication_reduction ▁▁▂▂▄▅▆▇████████████████████████████████
+wandb:     client_04/memory_reduction_mb ▄▇▆▄▅█▃▁▂▇▆▁▂▅▄▃▅▇▄▂▂▃▁▆▂▆█▂██▁▇▇▇▆▄▆▁▇▁
+wandb: client_04/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_04/onebit_accuracy ▁▃▆█████████████████████████████████████
+wandb:       client_04/power_consumption ▂▇▄▂▄█▄▅▂▁█▁▂█▁▂█▂▁▄▅▅▂▅▇▂▂▄▇▄▄▄▄▁▇▁█▁▂▇
+wandb:           client_04/training_loss █▆▅▅▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_05/adaptive_weight ▃▆▃▇▅▂▆▆▆▅▆▃▆▄▇▂█▃▁▃▄█▆▅▄▃▆▅▃▅▃▆▅▅▂▃▅▃▂▃
+wandb: client_05/communication_reduction ▁▃▄▄▅▆▆▆▇▇▇█████████████████████████████
+wandb:     client_05/memory_reduction_mb ▄▂▅▆▁▄▁▃▆█▅▂▄▂█▃▇▇▃▃▅▅▅▆▂▃▇▁▆▅▄▆▅▄▄█▇▃██
+wandb: client_05/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_05/onebit_accuracy ▁███████████████████████████████████████
+wandb:       client_05/power_consumption ▅▂▇██▇▂▂▂█▂▄▄▅▇▂▇▅▅▅▄▂▇▇▄▂▅▄▂▇▁▅▅▇██▂▄▄▂
+wandb:           client_05/training_loss █▅▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_06/adaptive_weight ▃▃▂▃▃▃▂▆▁▆▁▅▅▄▅▅▄▄▂▄▆▅▂▃▄▃▃▄▅▇▄▃▄█▅▂▃▅▂▆
+wandb: client_06/communication_reduction ▁▁▃▃▄▅▆█████████████████████████████████
+wandb:     client_06/memory_reduction_mb █▅▄▃▆▃▂▂▅▂▄▂▄▃▅▇▃▃▃▂▆▆▂▄▃▃▆▇▄▂▁▃▅█▄▅▁▃▃▂
+wandb: client_06/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_06/onebit_accuracy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       client_06/power_consumption ▇▇▇▄▄▇▇▅▁▂▇▇▁▄▂▇▄▅▂▂▇▂▇▄▄▂▄▁▇▁▄▁▇▂▄▂▁▄█▅
+wandb:           client_06/training_loss ▇█▆▆▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_07/adaptive_weight █▆▄▂▇▅▂▁▅▄▅▅▃▄█▃▆▄▇▃▄▅▄▅▃▅▄▇▆▁▃▃▂▄▆▃▆▇▇▃
+wandb: client_07/communication_reduction ▁▁▂▄▄▅▅▆▆▇▇█████████████████████████████
+wandb:     client_07/memory_reduction_mb ██▃▃▆▁▄▇▆▂▆▂▂▄█▃▇▆▁▅▁▇▆▃▇▂▆▅▇▂▃▂▂▇█▂▂▅▃▂
+wandb: client_07/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_07/onebit_accuracy ▁▂▆▃████████████████████████████████████
+wandb:       client_07/power_consumption ▄▅▅▂▅▇█▂█▅▂▁▄▂▂▅▂▂▂▇▄▄▅▄▂▂█▄▄▂▄▅▅▅▂█▇▄▂▂
+wandb:           client_07/training_loss ██▆▄▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_08/adaptive_weight ▆▆▆▅▄█▆▅▆▆▅▇▁▄▃▅▅▅▅▅██▃▅▅▄▃▇▄▇▆▅▆▂▅▄▃▅▅▅
+wandb: client_08/communication_reduction ▁▁▂▂▆▇▇▇████████████████████████████████
+wandb:     client_08/memory_reduction_mb ▅▅▅▃▇▁▇▇█▄▃▃▇▁▅▇▇▄▃▇▃█▃▃█▄▅▅▂▇█▃▆▂▅▃▆▇▃▂
+wandb: client_08/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_08/onebit_accuracy ▁▃██████████████████████████████████████
+wandb:       client_08/power_consumption ▂▁▅▂▄▇▇█▅▄▄▅▇▁▅▁▄▇▇▁▇▁▇▂▂▇▂▁▅▄▂▂▂▇▂▇▅█▇▂
+wandb:           client_08/training_loss █▆▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_09/adaptive_weight ▄▇▆▃▆▄▆▃▅█▅▅▄▄▅▄▄▆▄█▅▁▃▅▄▃▅▅▃▅▇▇▅▆▇▄█▃▃▄
+wandb: client_09/communication_reduction ▁▂▃▃▆▇▇█████████████████████████████████
+wandb:     client_09/memory_reduction_mb ▇▄▁▁▅▂▄▆▆▃▂▆▁▆▃▁▇▆▆▃▃▇█▂▄█▃▅▄▅▄▆▂▅▂▁▇▄▃█
+wandb: client_09/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_09/onebit_accuracy ▁▃██████████████████████████████████████
+wandb:       client_09/power_consumption ▇▂▄▁▇▁▁▇▂▁▄▇▇▇▄▁▇▇▅▅▁▂█▄▅▄▂▄▅▄▂█▅▄▅▇▂▂▇▄
+wandb:           client_09/training_loss ███▇▆▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_10/adaptive_weight ▆▆▁▆▆▁▁▆▃▂▅▃▅█▇▄▃▄▅▅▄▅▅▄▆▅▄▃▂▁▆▄▇▆▄▃▅▄▄▄
+wandb: client_10/communication_reduction ▁▂▂▄▄█▇█████████████████████████████████
+wandb:     client_10/memory_reduction_mb █▆█▄▇▅█▅▇▆▃▄▂▁▇▁▁▁▁▅▆▂▃▇▁▁▃▇▇█▆▆▅▅▆██▅▃▄
+wandb: client_10/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_10/onebit_accuracy ▁███████████████████████████████████████
+wandb:       client_10/power_consumption ▅▂▂▄▁▇▄█▂█▇▂▇▅▇▂▄▅▁▇▄▅▇█▅▂▅▄▅▂▄▅▅▅▂▅▄▅▂▂
+wandb:           client_10/training_loss █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_11/adaptive_weight ▄▄▇▄▄▄▅▅▃▄▃▅▇▆▅▅▃▅▆▄▅▅▇▄▅█▁▆▄█▇▅▄▄▂▆▅▅▃▅
+wandb: client_11/communication_reduction ▁▃▃▃▄▅▆▇▇███████████████████████████████
+wandb:     client_11/memory_reduction_mb ▇▁▄██▅▃▃▄▅▂▄▂▃▆▁▃█▅▃▄▅▄▅▅▇▅▇▂▇▅▆▆▇▇▅▅▁▁▆
+wandb: client_11/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_11/onebit_accuracy ▁▅██████████████████████████████████████
+wandb:       client_11/power_consumption ▂▇▂▁▇▁▄▄▅▂▅▄▁▇█▂▁▄▁▄▇▇█▅▄▄██▁▂▇█▇▅▅█▅▅▂▅
+wandb:           client_11/training_loss █▆▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_12/adaptive_weight ▁▅▄▂▃▅▇▂▅▃▅▄▂▁▂▅▆▄▅▄▄▆▇▁▃▁▅▄▅▁▅▆▄▄▃▅▄▃█▄
+wandb: client_12/communication_reduction ▁▂▂▃▄▅▅▆▆▇▇█████████████████████████████
+wandb:     client_12/memory_reduction_mb ▄▇▃▅▃▂▇▂▃▄▆▁▂▃▆▇▁█▃▅▅▃▇▂█▃▂▅▅█▁▃▁▄▆██▁▅▄
+wandb: client_12/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_12/onebit_accuracy ▁███████████████████████████████████████
+wandb:       client_12/power_consumption ▇▅▂▄▂▅▂▅▅▇▇▄▅▂▂█▅█▂▇▇▄▄▄▄▄▇▂▅▅▇▂▂▅▁▂▁▇█▂
+wandb:           client_12/training_loss ██▅▆▆▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_13/adaptive_weight ▃▆▃▅▆▃▄▅▄▄▄▄▆▄▇▆▆▅▅▆▄▅▂▃▅█▃▅▁▇▆▅▄▅▅▃▅▄▅▆
+wandb: client_13/communication_reduction ▁▃▃▃▃▅▅▆████████████████████████████████
+wandb:     client_13/memory_reduction_mb ▁▇▆▂▇█▅▃▃▄▆▁▁▃█▁▃▂▃▁▃█▇▅▅▂▄██▇▄▇▂▄█▇▆▆▁▆
+wandb: client_13/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_13/onebit_accuracy ▁█▆█████████████████████████████████████
+wandb:       client_13/power_consumption ▂▇▅▂▄▂█▂▁▁▇▁▁▂▅▅▅▇▅▅▇▄▁▄▄▄▇▂▂▂▅▇▇▇▅▇█▄▂█
+wandb:           client_13/training_loss █▆▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_14/adaptive_weight ▅▃▅▄▃▅▄▃▄▆▁▂▅▆▇▇▂▁▁▂█▁▆█▅▂▃▅▂▁▄▃▇▇▄▆▃▇▃▁
+wandb: client_14/communication_reduction ▁▁▁▂▃▅▅▆▇███████████████████████████████
+wandb:     client_14/memory_reduction_mb ▁▅▆▃▆▆▇█▇▄▇▆▇▂▆▃▇▇▃▇▅▄▃▂▆▂▂▇█▅▂▅▁██▁▇▃█▇
+wandb: client_14/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_14/onebit_accuracy ▂▁██████████████████████████████████████
+wandb:       client_14/power_consumption ▅▁▄▄▄▇▅█▅▁▄▄▄▂▇▅▄▇▇▇▄▅▄▄▂▁▂▂▂▇▂▄▇▂▇▇▇▄▅▇
+wandb:           client_14/training_loss █▅▆▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_15/adaptive_weight ▇▃▅▁▇▆▇▄▂▆▆▆▁▄▇▇▄▅▂█▅▅▆▅▃▄▅▅▆▅▆▆▄▃▇▅▃▄▃▇
+wandb: client_15/communication_reduction ▁▁▁▂▂▅▅▆▆███████████████████████████████
+wandb:     client_15/memory_reduction_mb ▄▂▅▂▃▁▄▅▇▃█▆▆█▃▇▆▂▄▄▄▃▂▇▃▄▂▅▇▃▁▅▃▄▅███▅▁
+wandb: client_15/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_15/onebit_accuracy ▁▅██████████████████████████████████████
+wandb:       client_15/power_consumption ▅▇▁▅▅▂▇▄▅▅█▁▄▂▄▄▄▅█▄▇▂▁▇▄▅▂▅▅▁▇▄▂▂▅▇▂▄▂▄
+wandb:           client_15/training_loss █▆▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_16/adaptive_weight ▄▇▇▄▆▃▄▅▅▁▄▄▄▆▇▅▆▄▅▃▄▄▆▃▆▆▂▆▃▃▄▅▆▇▁▄▆█▅▃
+wandb: client_16/communication_reduction ▁▁▂▃▃▃▆▆▆▇██████████████████████████████
+wandb:     client_16/memory_reduction_mb ▄▂▇▃▂▂▆▅▄▃▄▅▂▇▆▃▆▁▄▅▇▂▁▆▅▃▅▆▄▇█▁▅▃▃▅▄▁██
+wandb: client_16/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_16/onebit_accuracy ▁▅▃█████████████████████████████████████
+wandb:       client_16/power_consumption ▂▂█▇▅▇▁▅▅▂▅▅▇▇▁▅▅▇▇▁█▄▄▇▄▂▅█▂▁▄▅▂▇█▅▁▇▅█
+wandb:           client_16/training_loss ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_17/adaptive_weight ▃▅▅▅▅▄▆▂▄▆▁▄▃▃▄▁▅▄▆▅▃▃▇█▃▄▄▄▃▄▄▃▆▇▃▁▅▄▃▅
+wandb: client_17/communication_reduction ▁▁▂▂▂▃▃▃▅▆██████████████████████████████
+wandb:     client_17/memory_reduction_mb ▁▇▁▅▃▄▄▄▆▁▁▄▄▆▅▁▇▆█▂▃▃▅█▇▂▆▆▄▁▇▆▅▃▃▄▁▁▂█
+wandb: client_17/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_17/onebit_accuracy ▁███████████████████████████████████████
+wandb:       client_17/power_consumption ▄▁▅▅▇▂▅█▂▂█▄▇▇▂▁▅█▄▅▇▇█▅▅█▁▂▅▁▅▄▇▅▄▇▄▂▇▂
+wandb:           client_17/training_loss █▇▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_18/adaptive_weight ▆▂▆▅▅▃▄▅▅▅▄▄▂▅▇▅▃▃▄▃▄█▆▃▄▇██▇▄▆▅▅▂▂▁▇▆▄▇
+wandb: client_18/communication_reduction ▁▄▄▅▆▆▇█████████████████████████████████
+wandb:     client_18/memory_reduction_mb ▃▆▅▇▃▆▅▁▁▂▇▇▄▂▃▅▄▁▂█▇▃▃█▆▃▁▃▅▃▃▁▇█▃▆▅█▁▃
+wandb: client_18/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_18/onebit_accuracy ▁███████████████████████████████████████
+wandb:       client_18/power_consumption ▂▂▂▄▂▄▇▇▁█▄▁▅▄▇▂▅▇▂▂▄▂▇▄▇▂▂▇▇▄▇▁▅▄▄▄▂▇▄▁
+wandb:           client_18/training_loss █▆▅▃▄▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_19/adaptive_weight ▆▃▅▆▅▄▃▆▄▆▆▇▁▂▇▃▅▇▄▇▅█▆▃▆▃▂▃▅█▃▃▇▃▃█▂▅▆▆
+wandb: client_19/communication_reduction ▁▁▃▄▄▅▇▇████████████████████████████████
+wandb:     client_19/memory_reduction_mb ▂▃▂▃▆▆▄▄▆▅▃▃█▃▇▄▅▇▅▂▄▄▅▁▁▄▇█▇▅▁▅▄▁█▇▁▂▂▆
+wandb: client_19/model_size_reduction_mb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         client_19/onebit_accuracy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       client_19/power_consumption ▁▇█▇▂▄▄▇▅▇▇▁▅▄▇▄▇▄▁▅▅▄▂▇▇▅█▅▇▂▂▂▄▂▅▄█▄▄▅
+wandb:           client_19/training_loss ██▅▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:           edge_compatibility_high ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:            edge_compatibility_low ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         edge_compatibility_medium ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                   global_accuracy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                             round ▁▁▁▁▂▂▂▂▂▂▂▃▃▃▃▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▆▆▇▇▇▇▇███
+wandb: 
+wandb: Run summary:
+wandb:       avg_communication_reduction 95
+wandb:             avg_compression_ratio 37.6
+wandb:           avg_memory_reduction_mb 17.912
+wandb:          avg_memory_reduction_pct 1.1185
+wandb:       avg_model_size_reduction_mb 2.65
+wandb:               avg_onebit_accuracy 95
+wandb:             avg_power_consumption 2.765
+wandb:                 avg_training_loss 0.5
+wandb:         client_00/adaptive_weight 0.0658
+wandb: client_00/communication_reduction 95
+wandb:     client_00/memory_reduction_mb 13.09
+wandb: client_00/model_size_reduction_mb 2.65
+wandb:         client_00/onebit_accuracy 95
+wandb:       client_00/power_consumption 2.8
+wandb:           client_00/training_loss 0.5
+wandb:         client_01/adaptive_weight 0.0584
+wandb: client_01/communication_reduction 95
+wandb:     client_01/memory_reduction_mb 23.68
+wandb: client_01/model_size_reduction_mb 2.65
+wandb:         client_01/onebit_accuracy 95
+wandb:       client_01/power_consumption 2.6
+wandb:           client_01/training_loss 0.5
+wandb:         client_02/adaptive_weight 0.0461
+wandb: client_02/communication_reduction 95
+wandb:     client_02/memory_reduction_mb 15.07
+wandb: client_02/model_size_reduction_mb 2.65
+wandb:         client_02/onebit_accuracy 95
+wandb:       client_02/power_consumption 2.9
+wandb:           client_02/training_loss 0.5
+wandb:         client_03/adaptive_weight 0.0525
+wandb: client_03/communication_reduction 95
+wandb:     client_03/memory_reduction_mb 11.75
+wandb: client_03/model_size_reduction_mb 2.65
+wandb:         client_03/onebit_accuracy 95
+wandb:       client_03/power_consumption 2.9
+wandb:           client_03/training_loss 0.5
+wandb:         client_04/adaptive_weight 0.0585
+wandb: client_04/communication_reduction 95
+wandb:     client_04/memory_reduction_mb 11.44
+wandb: client_04/model_size_reduction_mb 2.65
+wandb:         client_04/onebit_accuracy 95
+wandb:       client_04/power_consumption 2.9
+wandb:           client_04/training_loss 0.5
+wandb:         client_05/adaptive_weight 0.0637
+wandb: client_05/communication_reduction 95
+wandb:     client_05/memory_reduction_mb 16.25
+wandb: client_05/model_size_reduction_mb 2.65
+wandb:         client_05/onebit_accuracy 95
+wandb:       client_05/power_consumption 2.6
+wandb:           client_05/training_loss 0.5
+wandb:         client_06/adaptive_weight 0.0609
+wandb: client_06/communication_reduction 95
+wandb:     client_06/memory_reduction_mb 11.41
+wandb: client_06/model_size_reduction_mb 2.65
+wandb:         client_06/onebit_accuracy 95
+wandb:       client_06/power_consumption 2.8
+wandb:           client_06/training_loss 0.5
+wandb:         client_07/adaptive_weight 0.0482
+wandb: client_07/communication_reduction 95
+wandb:     client_07/memory_reduction_mb 11.23
+wandb: client_07/model_size_reduction_mb 2.65
+wandb:         client_07/onebit_accuracy 95
+wandb:       client_07/power_consumption 2.6
+wandb:           client_07/training_loss 0.5
+wandb:         client_08/adaptive_weight 0.0386
+wandb: client_08/communication_reduction 95
+wandb:     client_08/memory_reduction_mb 27.86
+wandb: client_08/model_size_reduction_mb 2.65
+wandb:         client_08/onebit_accuracy 95
+wandb:       client_08/power_consumption 2.6
+wandb:           client_08/training_loss 0.5
+wandb:         client_09/adaptive_weight 0.0453
+wandb: client_09/communication_reduction 95
+wandb:     client_09/memory_reduction_mb 28.97
+wandb: client_09/model_size_reduction_mb 2.65
+wandb:         client_09/onebit_accuracy 95
+wandb:       client_09/power_consumption 2.7
+wandb:           client_09/training_loss 0.5
+wandb:         client_10/adaptive_weight 0.0545
+wandb: client_10/communication_reduction 95
+wandb:     client_10/memory_reduction_mb 29.15
+wandb: client_10/model_size_reduction_mb 2.65
+wandb:         client_10/onebit_accuracy 95
+wandb:       client_10/power_consumption 2.6
+wandb:           client_10/training_loss 0.5
+wandb:         client_11/adaptive_weight 0.0454
+wandb: client_11/communication_reduction 95
+wandb:     client_11/memory_reduction_mb 10.8
+wandb: client_11/model_size_reduction_mb 2.65
+wandb:         client_11/onebit_accuracy 95
+wandb:       client_11/power_consumption 3
+wandb:           client_11/training_loss 0.5
+wandb:         client_12/adaptive_weight 0.0486
+wandb: client_12/communication_reduction 95
+wandb:     client_12/memory_reduction_mb 16.57
+wandb: client_12/model_size_reduction_mb 2.65
+wandb:         client_12/onebit_accuracy 95
+wandb:       client_12/power_consumption 2.9
+wandb:           client_12/training_loss 0.5
+wandb:         client_13/adaptive_weight 0.0402
+wandb: client_13/communication_reduction 95
+wandb:     client_13/memory_reduction_mb 23.26
+wandb: client_13/model_size_reduction_mb 2.65
+wandb:         client_13/onebit_accuracy 95
+wandb:       client_13/power_consumption 2.5
+wandb:           client_13/training_loss 0.5
+wandb:         client_14/adaptive_weight 0.0406
+wandb: client_14/communication_reduction 95
+wandb:     client_14/memory_reduction_mb 11.72
+wandb: client_14/model_size_reduction_mb 2.65
+wandb:         client_14/onebit_accuracy 95
+wandb:       client_14/power_consumption 3
+wandb:           client_14/training_loss 0.5
+wandb:         client_15/adaptive_weight 0.0469
+wandb: client_15/communication_reduction 95
+wandb:     client_15/memory_reduction_mb 12.66
+wandb: client_15/model_size_reduction_mb 2.65
+wandb:         client_15/onebit_accuracy 95
+wandb:       client_15/power_consumption 2.8
+wandb:           client_15/training_loss 0.5
+wandb:         client_16/adaptive_weight 0.0327
+wandb: client_16/communication_reduction 95
+wandb:     client_16/memory_reduction_mb 29.6
+wandb: client_16/model_size_reduction_mb 2.65
+wandb:         client_16/onebit_accuracy 95
+wandb:       client_16/power_consumption 2.6
+wandb:           client_16/training_loss 0.5
+wandb:         client_17/adaptive_weight 0.0468
+wandb: client_17/communication_reduction 95
+wandb:     client_17/memory_reduction_mb 14.97
+wandb: client_17/model_size_reduction_mb 2.65
+wandb:         client_17/onebit_accuracy 95
+wandb:       client_17/power_consumption 3
+wandb:           client_17/training_loss 0.5
+wandb:         client_18/adaptive_weight 0.0562
+wandb: client_18/communication_reduction 95
+wandb:     client_18/memory_reduction_mb 13.98
+wandb: client_18/model_size_reduction_mb 2.65
+wandb:         client_18/onebit_accuracy 95
+wandb:       client_18/power_consumption 2.7
+wandb:           client_18/training_loss 0.5
+wandb:         client_19/adaptive_weight 0.05
+wandb: client_19/communication_reduction 95
+wandb:     client_19/memory_reduction_mb 24.78
+wandb: client_19/model_size_reduction_mb 2.65
+wandb:         client_19/onebit_accuracy 95
+wandb:       client_19/power_consumption 2.8
+wandb:           client_19/training_loss 0.5
+wandb:           edge_compatibility_high 20
+wandb:            edge_compatibility_low 0
+wandb:         edge_compatibility_medium 0
+wandb:                   global_accuracy 1
+wandb:                             round 300
+wandb: 
+wandb: 🚀 View run OnebitFedAwa_fedawa_20clients_300rounds at: https://wandb.ai/phyve/onebit-fedawa-fl/runs/xjco2yml
+wandb: ⭐️ View project at: https://wandb.ai/phyve/onebit-fedawa-fl
+wandb: Synced 5 W&B file(s), 100 media file(s), 200 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20250621_190257-xjco2yml/logs
+
+🏁 Program finished.
+(fedawa1bitjune20) ds_saksham@cheetah:/storage/ds_saksham/FedAWA_quan_1bit_graphs$ 
+
+
