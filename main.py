@@ -210,9 +210,9 @@ def initialize_wandb(args):
 
 def create_client_plots(client_metrics_history, num_clients, num_rounds):
     """Create individual client plots using WandB"""
-    
+
     print("📊 Creating individual client plots...")
-    
+
     # Extract data for each client across all rounds
     clients_data = {}
     for client_id in range(num_clients):
@@ -224,7 +224,7 @@ def create_client_plots(client_metrics_history, num_clients, num_rounds):
             'onebit_accuracy': [],
             'communication_reduction': []
         }
-    
+
     # Populate data from metrics history
     for round_num, round_metrics in client_metrics_history.items():
         for metrics in round_metrics:
@@ -236,7 +236,7 @@ def create_client_plots(client_metrics_history, num_clients, num_rounds):
                 clients_data[client_id]['model_size_reduction'].append(metrics['Model Size Reduction (MB)'])
                 clients_data[client_id]['onebit_accuracy'].append(metrics['OneBit Inference Accuracy (%)'])
                 clients_data[client_id]['communication_reduction'].append(metrics['Communication Reduction (%)'])
-    
+
     # Create individual plots for each metric
     metrics_to_plot = [
         ('avg_training_loss', 'Average Training Loss', 'Training Loss'),
@@ -245,36 +245,36 @@ def create_client_plots(client_metrics_history, num_clients, num_rounds):
         ('onebit_accuracy', 'OneBit Inference Accuracy (%)', 'Accuracy (%)'),
         ('communication_reduction', 'Communication Reduction (%)', 'Reduction (%)')
     ]
-    
+
     for metric_key, metric_title, y_label in metrics_to_plot:
         print(f"  Creating {metric_title} plots for all clients...")
-        
+
         # Create data for WandB plotting
         plot_data = []
-        
+
         for client_id in range(num_clients):
             client_data = clients_data[client_id]
-            
+
             for round_num, value in zip(client_data['rounds'], client_data[metric_key]):
                 plot_data.append({
                     'Round': round_num,
                     'Value': value,
                     'Client': f'Client_{client_id:02d}'
                 })
-        
+
         # Create WandB custom plot
         try:
             # Log individual client data to WandB
             for client_id in range(num_clients):
                 client_data = clients_data[client_id]
-                
+
                 # Create a table for this client and metric
                 table_data = []
                 for round_num, value in zip(client_data['rounds'], client_data[metric_key]):
                     table_data.append([round_num, value])
-                
+
                 table = wandb.Table(data=table_data, columns=["Round", y_label])
-                
+
                 # Create line plot for this client
                 wandb.log({
                     f"{metric_title}/Client_{client_id:02d}": wandb.plot.line(
@@ -282,11 +282,12 @@ def create_client_plots(client_metrics_history, num_clients, num_rounds):
                         title=f"{metric_title} - Client {client_id:02d}"
                     )
                 })
-        
+
         except Exception as e:
             print(f"  Warning: Error creating {metric_title} plots: {e}")
-    
+
     print("✅ Individual client plots created successfully")
+
 
 def log_round_metrics_to_wandb(client_metrics, round_num, global_acc):
     """Log round metrics to WandB"""
